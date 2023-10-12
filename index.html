@@ -1,12 +1,61 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <link rel="stylesheet" href="style.css">
-</head>
-<body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto+Condensed&display=swap"
+      rel="stylesheet"
+    />
+    <title>To-Do</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div id="wrapper">
+      <div class="container">
+        <!-- Nav Bar -->
+
+        <div class="navbar">
+          <p class="nav-heading">/ / TO-DO</p>
+          <img src="Images/checklist.png" alt="To-Do-icon" class="To-Do-icon" />
+        </div>
+
+        <!-- content -->
+
+        <div class="Bottom-container">
+          <!-- Left-Container -->
+
+          <div class="left-container">
+            <div class="left-Upper-contents">
+              <ul>
+                <li class="Home">
+                  <span class="Home-Name">Home</span
+                  ><span class="Home-count"></span>
+                </li>
+                <li class="Tasks"><span class="Tasks-Name">Tasks</span></li>
+                <li class="Today-Tasks">
+                  <span class="Today-Tasks-Name">Today</span
+                  ><span class="Today-Tasks-count"></span>
+                </li>
+                <li class="Weekly-Tasks">
+                  <span class="Weekly-Tasks-Name">Week</span
+                  ><span class="Today-Tasks-count"></span>
+                </li>
+                <li class="Tasks">
+                  <span class="Tasks-Name">Notes</span
+                  ><span class="Notes-count"></span>
+                </li>
+              </ul>
+            </div>
+            <div class="left-lower-contents">+</div>
+            
+          </div>
+          <div class="right-container">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Officiis autem tenetur eaque, ratione ut tempora sed dicta. Eveniet laborum exercitationem, error vitae temporibus molestiae sint?</div>
+        </div>
+      </div>
+    </div>
     <script src="index.js"></script>
-</body>
+  </body>
 </html>
