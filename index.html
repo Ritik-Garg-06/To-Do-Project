@@ -14,18 +14,59 @@
   </head>
   <body>
     <div id="wrapper">
-      <div class="container">
+      <div class="Insert-Prompt">
         <!-- Nav Bar -->
 
-        <div class="navbar">
-          <p class="nav-heading">/ / TO-DO</p>
-          <img src="Images/checklist.png" alt="To-Do-icon" class="To-Do-icon" />
+        <div class="Prompt-Navbar">
+          <p class="Prompt-nav-heading">Create a Note...</p>
         </div>
 
         <!-- content -->
 
         <div class="Bottom-container">
           <!-- Left-Container -->
+
+          <div class="left-container">
+            <div class="left-Upper-contents">
+              <ul>
+                <li class="To-Do">
+                  <span class="To-Do-Name">To-Do</span>
+                </li>
+                <li class="Note">
+                  <span class="Today-Tasks-Name">Note</span>
+                </li>
+              </ul>
+            </div>
+          </div>
+          <div class="right-container">
+            <input
+              type="text"
+              name="Title"
+              id="Create-Note-Title"
+              placeholder="Title: Pay Bills"
+            />
+
+            <input
+              type="text"
+              name="Description"
+              id="Create-Note-Description"
+              placeholder="Details: e.g. internet,phone,rent."
+            />
+
+            <input type="Date" name="Due-date" id="Create-Note-Due-Date" />
+            <label for="Create-Note-Due-Date"></label>
+          </div>
+        </div>
+      </div>
+      <!-- <div class="container">
+
+        <div class="navbar">
+          <p class="nav-heading">/ / TO-DO</p>
+          <img src="Images/checklist.png" alt="To-Do-icon" class="To-Do-icon" />
+        </div>
+
+
+        <div class="Bottom-container">
 
           <div class="left-container">
             <div class="left-Upper-contents">
@@ -50,12 +91,12 @@
               </ul>
             </div>
             <div class="left-lower-contents">+</div>
-            
           </div>
-          <div class="right-container">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Officiis autem tenetur eaque, ratione ut tempora sed dicta. Eveniet laborum exercitationem, error vitae temporibus molestiae sint?</div>
+          <div class="right-container"></div>
         </div>
-      </div>
+      </div> -->
     </div>
-    <script src="index.js"></script>
+    <div class="blur"></div>
   </body>
+  <script src="index.js"></script>
 </html>
