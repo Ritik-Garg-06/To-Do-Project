@@ -14,11 +14,12 @@
   </head>
   <body>
     <div id="wrapper">
-      <div class="Insert-Prompt">
+      <div class="Insert-Prompt hidden">
         <!-- Nav Bar -->
 
         <div class="Prompt-Navbar">
           <p class="Prompt-nav-heading">Create a Note...</p>
+          <img src="Images/x-mark.png" alt="Cross" class="Close-Prompt">
         </div>
 
         <!-- content -->
@@ -38,7 +39,7 @@
               </ul>
             </div>
           </div>
-          <div class="right-container">
+          <div class="Prompt-right-container">
             <input
               type="text"
               name="Title"
@@ -46,19 +47,63 @@
               placeholder="Title: Pay Bills"
             />
 
-            <input
-              type="text"
-              name="Description"
+            <textarea
               id="Create-Note-Description"
+              name="Description"
+              rows="4"
+              cols="50"
               placeholder="Details: e.g. internet,phone,rent."
-            />
+            ></textarea>
 
-            <input type="Date" name="Due-date" id="Create-Note-Due-Date" />
-            <label for="Create-Note-Due-Date"></label>
+            <div class="date">
+              <label for="Create-Note-Due-Date">Date :</label>
+              <input type="Date" name="Due-date" id="Create-Note-Due-Date" />
+            </div>
+
+            <div class="Prompt-form">
+              <div class="Priorities">
+                <p class="priorities-select-text">Priorities:</p>
+                <input
+                  type="radio"
+                  id="option1"
+                  name="options"
+                  value="option1"
+                />
+                <label for="option1" class="radio-labels radio-label-1"
+                  >Low</label
+                >
+
+                <input
+                  type="radio"
+                  id="option2"
+                  name="options"
+                  value="option2"
+                />
+
+                <label for="option2" class="radio-labels radio-label-2"
+                  >Medium</label
+                >
+
+                <input
+                  type="radio"
+                  id="option3"
+                  name="options"
+                  value="option3"
+                />
+
+                <label for="option3" class="radio-labels radio-label-3"
+                  >High</label
+                >
+              </div>
+
+              <div class="submit">
+                <input type="submit" value="Add to Note" />
+              </div>
+            </div>
           </div>
         </div>
       </div>
-      <!-- <div class="container">
+      <div class="container">
 
         <div class="navbar">
           <p class="nav-heading">/ / TO-DO</p>
@@ -94,9 +139,10 @@
           </div>
           <div class="right-container"></div>
         </div>
-      </div> -->
+      </div>
+      <div class="blur hidden"></div>
     </div>
-    <div class="blur"></div>
+    </div>
   </body>
   <script src="index.js"></script>
 </html>

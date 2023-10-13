@@ -7,27 +7,139 @@
 
 /* Prompt Container */
 
-.Prompt-Navbar{
+.Insert-Prompt {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 50%;
+  padding: 20px;
+  z-index: 2;
+}
+
+
+.Prompt-Navbar {
   width: 100%;
-  height: 8%;
+  height: 18%;
   background: #c38d95;
   display: flex;
-  overflow-y: hidden;
   position: relative;
+}
+
+
+.Close-Prompt{
+  height: 1.5rem;
+  position: absolute;
+  right: 25px;
+  top: 12px;
+  cursor: pointer;
 }
 
 .Prompt-nav-heading {
   padding: 10px;
-  font-size: 2rem;
-  width: 50%;
+  font-size: 1.5rem;
   color: white;
   font-weight: bold;
   letter-spacing: 3px;
 }
 
+.Prompt-right-container {
+  display: flex;
+  flex-direction: column;
+  margin: 1.5rem;
+  /* row-gap: 2rem; */
+}
+
+.priorities-select-text {
+  display: inline-block;
+  margin-right: 5%;
+}
+
+#Create-Note-Title {
+  margin-bottom: 5%;
+  border: none;
+}
+
+#Create-Note-Description {
+  height: 40%;
+  border: none;
+}
+
+.date {
+  margin-top: 20%;
+  margin-bottom: 5%;
+}
+
+.Priorities {
+  width: 75%;
+}
+
+#Create-Note-Due-Date {
+  width: 28%;
+  border: 1px solid #3ba395;
+  color: #3ba395;
+}
+
+.Prompt-form {
+  display: flex;
+  justify-content: space-between;
+}
+
+input[type="radio"] {
+  display: none;
+}
+
+label {
+  display: inline-block;
+}
+
+.radio-labels {
+  width: 19%;
+  text-align: center;
+  border-radius: 5px;
+}
+
+.radio-label-1{
+  border: 2px solid green;
+  color: green;
+}
+
+
+.radio-label-2{
+  border: 2px solid yellow;
+  color: yellow;
+}
+
+
+.radio-label-3{
+  border: 2px solid red;
+  color: red;
+}
+
+input[type ="submit"]
+{
+  color: #3ba395;
+  background-color: transparent;
+  border: 1px solid #3ba395;
+  border-radius: 20px;
+  width: 100%;
+}
+.submit{
+  width: 20%;
+}
+
+.hidden{
+  display: none;
+  z-index: -1;
+}
+
+.visible{
+  /* display: block; */
+  z-index: 10;
+}
 /* Main Container */
 
-#wrapper{
+#wrapper {
   height: 100vh;
   width: 100vw;
   overflow: hidden;
@@ -35,18 +147,11 @@
 }
 
 .container {
-  width: 80%;
   height: 100%;
   margin: auto;
-  border: 2px solid green;
 }
 
-.container.active{
-  backdrop-filter: blur(50px);
-  z-index: -1;
-}
-
-.active{
+.blur {
   position: fixed;
   top: 0;
   right: 0;
@@ -136,4 +241,3 @@
 .right-container {
   width: 100%;
 }
-
