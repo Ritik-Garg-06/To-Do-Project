@@ -3,11 +3,12 @@
   padding: 0;
   box-sizing: border-box;
   font-family: "Roboto Condensed", sans-serif;
+  user-select: none;
 }
 
 /* Prompt Container */
 
-.Insert-Prompt {
+.Add-Task-Prompt {
   position: fixed;
   top: 50%;
   left: 50%;
@@ -17,8 +18,7 @@
   z-index: 2;
 }
 
-
-.Prompt-Navbar {
+.Add-Task-Prompt-Navbar {
   width: 100%;
   height: 18%;
   background: #c38d95;
@@ -26,8 +26,7 @@
   position: relative;
 }
 
-
-.Close-Prompt{
+.Close-Prompt {
   height: 1.5rem;
   position: absolute;
   right: 25px;
@@ -35,7 +34,7 @@
   cursor: pointer;
 }
 
-.Prompt-nav-heading {
+.Add-Task-Prompt-nav-heading {
   padding: 10px;
   font-size: 1.5rem;
   color: white;
@@ -43,7 +42,7 @@
   letter-spacing: 3px;
 }
 
-.Prompt-right-container {
+.Prompt-right-container-To-Do {
   display: flex;
   flex-direction: column;
   margin: 1.5rem;
@@ -80,7 +79,7 @@
   color: #3ba395;
 }
 
-.Prompt-form {
+.Prompt-form-To-Do {
   display: flex;
   justify-content: space-between;
 }
@@ -99,43 +98,50 @@ label {
   border-radius: 5px;
 }
 
-.radio-label-1{
+.radio-label-1 {
   border: 2px solid green;
   color: green;
 }
 
-
-.radio-label-2{
+.radio-label-2 {
   border: 2px solid yellow;
   color: yellow;
 }
 
-
-.radio-label-3{
+.radio-label-3 {
   border: 2px solid red;
   color: red;
 }
 
-input[type ="submit"]
-{
+input[type="submit"] {
   color: #3ba395;
   background-color: transparent;
   border: 1px solid #3ba395;
   border-radius: 20px;
   width: 100%;
 }
-.submit{
+
+.Prompt-right-container-Note-form {
+  margin: 5%;
+  height: 25vh;
+  display: flex;
+  flex-direction: column;
+}
+.Prompt-form-Submit-To-Do {
   width: 20%;
 }
 
-.hidden{
-  display: none;
-  z-index: -1;
+.Prompt-form-Submit-Note {
+  width: 25%;
+  margin: 5%;
 }
 
-.visible{
-  /* display: block; */
-  z-index: 10;
+.hidden {
+  display: none;
+}
+
+.visible {
+  display: block;
 }
 /* Main Container */
 
@@ -240,4 +246,41 @@ input[type ="submit"]
 
 .right-container {
   width: 100%;
+}
+
+.right-container ul {
+  margin: 6%;
+}
+
+.right-container ul li {
+  position: relative;
+  list-style: none;
+  font-size: 1.3rem;
+  margin: 3% auto;
+  user-select: none;
+  cursor: pointer;
+  width: 95%;
+  height: 6vh;
+  align-items: center;
+  display: flex;
+  box-shadow: 4px 4px 10px 2px #888888;
+}
+
+.right-container ul li::before {
+  content: "";
+  height: 60%;
+  width: 27px;
+  border-radius: 50%;
+  background-image: url(Images/unchecked.png);
+  background-size: cover;
+  margin: 0% 2%;
+}
+
+.right-container ul li.checked {
+  color: #878787;
+  text-decoration: line-through;
+}
+
+.right-container ul li.checked::before{
+  background-image: url(Images/checked.png);
 }

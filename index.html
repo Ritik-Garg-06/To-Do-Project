@@ -14,11 +14,11 @@
   </head>
   <body>
     <div id="wrapper">
-      <div class="Insert-Prompt hidden">
+      <div class="Add-Task-Prompt hidden">
         <!-- Nav Bar -->
 
-        <div class="Prompt-Navbar">
-          <p class="Prompt-nav-heading">Create a Note...</p>
+        <div class="Add-Task-Prompt-Navbar">
+          <p class="Add-Task-Prompt-nav-heading">Create a Note...</p>
           <img src="Images/x-mark.png" alt="Cross" class="Close-Prompt">
         </div>
 
@@ -39,7 +39,7 @@
               </ul>
             </div>
           </div>
-          <div class="Prompt-right-container">
+          <div class="Prompt-right-container-To-Do visible">
             <input
               type="text"
               name="Title"
@@ -60,7 +60,7 @@
               <input type="Date" name="Due-date" id="Create-Note-Due-Date" />
             </div>
 
-            <div class="Prompt-form">
+            <div class="Prompt-form-To-Do">
               <div class="Priorities">
                 <p class="priorities-select-text">Priorities:</p>
                 <input
@@ -96,9 +96,30 @@
                 >
               </div>
 
-              <div class="submit">
+              <div class="Prompt-form-Submit-To-Do">
                 <input type="submit" value="Add to Note" />
               </div>
+            </div>
+          </div>
+          <div class="Prompt-right-container-Note hidden">
+            <div class="Prompt-right-container-Note-form">
+            <input
+              type="text"
+              name="Title"
+              id="Create-Note-Title"
+              placeholder="Title: "
+            />
+
+            <textarea
+              id="Create-Note-Description"
+              name="Description"
+              rows="4"
+              cols="50"
+              placeholder="Details: "
+            ></textarea>
+          </div>
+            <div class="Prompt-form-Submit-Note">
+              <input type="submit" value="Create Note" onclick="addTask()"/>
             </div>
           </div>
         </div>
@@ -121,27 +142,47 @@
                   ><span class="Home-count"></span>
                 </li>
                 <li class="Tasks"><span class="Tasks-Name">Tasks</span></li>
-                <li class="Today-Tasks">
-                  <span class="Today-Tasks-Name">Today</span
-                  ><span class="Today-Tasks-count"></span>
+                <li class="Today">
+                  <span class="Today-task-Name">Today</span
+                  ><span class="Today-count"></span>
                 </li>
                 <li class="Weekly-Tasks">
                   <span class="Weekly-Tasks-Name">Week</span
                   ><span class="Today-Tasks-count"></span>
                 </li>
-                <li class="Tasks">
-                  <span class="Tasks-Name">Notes</span
+                <li class="Notes ">
+                  <span class="Notes-Name">Notes</span
                   ><span class="Notes-count"></span>
                 </li>
               </ul>
             </div>
             <div class="left-lower-contents">+</div>
           </div>
-          <div class="right-container"></div>
+          <div class="right-container">
+            <ul class="home-tasks-notes">
+              <li class="checked">Task 1</li>
+              <li>Task 1</li>
+              <li>Task 1</li>
+          </ul>
+            <ul class="today-tasks-content hidden">
+              <li>Task 1</li>
+              <li class="checked">Task 1</li>
+              <li>Task 1</li>
+            </ul>
+            <ul class="weekly-tasks-content hidden">
+              <li>Task 1</li>
+              <li>Task 1</li>
+              <li  class="checked">Task 1</li>
+            </ul>
+            <ul class="notes-content hidden">
+              <li class="checked">Task 1</li>
+              <li>Task 1</li>
+              <li  class="checked">Task 1</li>
+            </ul>
+          </div>
         </div>
       </div>
       <div class="blur hidden"></div>
-    </div>
     </div>
   </body>
   <script src="index.js"></script>
