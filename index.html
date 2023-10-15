@@ -9,6 +9,11 @@
       href="https://fonts.googleapis.com/css2?family=Roboto+Condensed&display=swap"
       rel="stylesheet"
     />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+    />
+
     <title>To-Do</title>
     <link rel="stylesheet" href="style.css" />
   </head>
@@ -19,7 +24,7 @@
 
         <div class="Add-Task-Prompt-Navbar">
           <p class="Add-Task-Prompt-nav-heading">Create a Note...</p>
-          <img src="Images/x-mark.png" alt="Cross" class="Close-Prompt">
+          <img src="Images/x-mark.png" alt="Cross" class="Close-Prompt" />
         </div>
 
         <!-- content -->
@@ -39,7 +44,7 @@
               </ul>
             </div>
           </div>
-          <div class="Prompt-right-container-To-Do visible">
+          <div class="Prompt-right-container-To-Do">
             <input
               type="text"
               name="Title"
@@ -97,43 +102,40 @@
               </div>
 
               <div class="Prompt-form-Submit-To-Do">
-                <input type="submit" value="Add to Note" />
+                <input type="submit" value="Add to Note" onclick="addToDo()" />
               </div>
             </div>
           </div>
           <div class="Prompt-right-container-Note hidden">
             <div class="Prompt-right-container-Note-form">
-            <input
-              type="text"
-              name="Title"
-              id="Create-Note-Title"
-              placeholder="Title: "
-            />
+              <input
+                type="text"
+                name="Title"
+                id="Create-Note-Title-forNote"
+                placeholder="Title: "
+              />
 
-            <textarea
-              id="Create-Note-Description"
-              name="Description"
-              rows="4"
-              cols="50"
-              placeholder="Details: "
-            ></textarea>
-          </div>
+              <textarea
+                id="Create-Note-Description-forNote"
+                name="Description"
+                rows="4"
+                cols="50"
+                placeholder="Details: "
+              ></textarea>
+            </div>
             <div class="Prompt-form-Submit-Note">
-              <input type="submit" value="Create Note" onclick="addTask()"/>
+              <input type="submit" value="Create Note" onclick="addNote()" />
             </div>
           </div>
         </div>
       </div>
       <div class="container">
-
         <div class="navbar">
           <p class="nav-heading">/ / TO-DO</p>
           <img src="Images/checklist.png" alt="To-Do-icon" class="To-Do-icon" />
         </div>
 
-
         <div class="Bottom-container">
-
           <div class="left-container">
             <div class="left-Upper-contents">
               <ul>
@@ -150,7 +152,7 @@
                   <span class="Weekly-Tasks-Name">Week</span
                   ><span class="Today-Tasks-count"></span>
                 </li>
-                <li class="Notes ">
+                <li class="Notes">
                   <span class="Notes-Name">Notes</span
                   ><span class="Notes-count"></span>
                 </li>
@@ -159,26 +161,10 @@
             <div class="left-lower-contents">+</div>
           </div>
           <div class="right-container">
-            <ul class="home-tasks-notes">
-              <li class="checked">Task 1</li>
-              <li>Task 1</li>
-              <li>Task 1</li>
-          </ul>
-            <ul class="today-tasks-content hidden">
-              <li>Task 1</li>
-              <li class="checked">Task 1</li>
-              <li>Task 1</li>
-            </ul>
-            <ul class="weekly-tasks-content hidden">
-              <li>Task 1</li>
-              <li>Task 1</li>
-              <li  class="checked">Task 1</li>
-            </ul>
-            <ul class="notes-content hidden">
-              <li class="checked">Task 1</li>
-              <li>Task 1</li>
-              <li  class="checked">Task 1</li>
-            </ul>
+            <ul class="home-tasks-notes"></ul>
+            <ul class="today-tasks-content hidden"></ul>
+            <ul class="weekly-tasks-content hidden"></ul>
+            <ul class="notes-content hidden"></ul>
           </div>
         </div>
       </div>

@@ -64,6 +64,16 @@
   border: none;
 }
 
+#Create-Note-Title-forNote {
+  margin-bottom: 5%;
+  border: none;
+}
+
+#Create-Note-Description-forNote {
+  height: 40%;
+  border: none;
+}
+
 .date {
   margin-top: 20%;
   margin-bottom: 5%;
@@ -138,10 +148,6 @@ input[type="submit"] {
 
 .hidden {
   display: none;
-}
-
-.visible {
-  display: block;
 }
 /* Main Container */
 
@@ -266,6 +272,23 @@ input[type="submit"] {
   box-shadow: 4px 4px 10px 2px #888888;
 }
 
+.Cross{
+  position: absolute;
+  right: 15px;
+  top: 6px;
+  width: 30px;
+  height: 30px;
+  font-size: 1.25rem;
+  color: #555;
+  line-height: 30px;
+  text-align: center;
+  border-radius: 50%;
+}
+
+.Cross:hover{
+  background: #edeef0;
+}
+
 .right-container ul li::before {
   content: "";
   height: 60%;
@@ -274,6 +297,11 @@ input[type="submit"] {
   background-image: url(Images/unchecked.png);
   background-size: cover;
   margin: 0% 2%;
+}
+
+.Update-Data{
+  right: 45px;
+  font-size: 0.9rem;
 }
 
 .right-container ul li.checked {
