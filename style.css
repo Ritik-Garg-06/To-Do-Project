@@ -17,6 +17,17 @@
   padding: 20px;
   z-index: 2;
 }
+.edit-container{
+  left: 65%;
+}
+.edit-To-Do{
+  width: 40vw;
+}
+.close-edit{
+  font-size: 1.5rem;
+  color: #3ba395;
+  cursor: pointer;
+}
 
 .Add-Task-Prompt-Navbar {
   width: 100%;
@@ -123,6 +134,21 @@ label {
   color: red;
 }
 
+input[type="radio"]:checked + .radio-label-1{
+  color: white;
+  background-color: green;
+}
+
+input[type="radio"]:checked + .radio-label-2{
+  color: white;
+  background-color: yellow;
+}
+
+input[type="radio"]:checked + .radio-label-3{
+  color: white;
+  background-color: red;
+}
+
 input[type="submit"] {
   color: #3ba395;
   background-color: transparent;
@@ -171,6 +197,11 @@ input[type="submit"] {
   width: 100vw;
   backdrop-filter: blur(5px);
   z-index: 1;
+}
+
+.edit-close-container{
+  display: flex;
+  justify-content: space-between;
 }
 
 .navbar {
@@ -301,7 +332,21 @@ input[type="submit"] {
 
 .Update-Data{
   right: 45px;
+  position: absolute;
+  /* right: 15px; */
+  top: 10px;
+  width: 20px;
+  height: 20px;
+  /* font-size: 1.25rem; */
+  color: #555;
+  line-height: 30px;
+  text-align: center;
+  /* border-radius: 50%; */
   font-size: 0.9rem;
+}
+
+.Update-Data:hover{
+  background: #edeef0;
 }
 
 .right-container ul li.checked {
