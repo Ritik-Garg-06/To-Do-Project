@@ -13,19 +13,22 @@
     <link rel="stylesheet" href="style.css" />
   </head>
   <body>
+    <!-- Main Wrapper For Complete Code -->
     <div id="wrapper">
+      <!-- Add Task Prompt -->
+
       <div class="Add-Task-Prompt hidden">
-        <!-- Nav Bar -->
+        <!--Add Task Nav Bar -->
 
         <div class="Add-Task-Prompt-Navbar">
           <p class="Add-Task-Prompt-nav-heading">Create a Note...</p>
           <img src="Images/x-mark.png" alt="Cross" class="Close-Prompt" />
         </div>
 
-        <!-- content -->
+        <!-- Add Task Bottom Container -->
 
         <div class="Bottom-container">
-          <!-- Left-Container -->
+          <!--Add Task Bottom Left-Container -->
 
           <div class="left-container">
             <div class="left-Upper-contents">
@@ -39,6 +42,8 @@
               </ul>
             </div>
           </div>
+
+          <!-- Add Task Bottom RIGHT-Container For TO-Do LIST -->
           <div class="Prompt-right-container-To-Do">
             <input
               type="text"
@@ -57,18 +62,20 @@
 
             <div class="date">
               <label for="Create-Note-Due-Date">Date :</label>
-              <input type="Date" name="Due-date" class="Due-date" id="Create-Note-Due-Date" />
+              <input
+                type="Date"
+                name="Due-date"
+                class="Due-date"
+                id="Create-Note-Due-Date"
+                value="2024-01-01"
+              />
             </div>
 
             <div class="Prompt-form-To-Do">
               <div class="Priorities">
+                `
                 <p class="priorities-select-text">Priorities:</p>
-                <input
-                  type="radio"
-                  id="option1"
-                  name="options"
-                  value="option1"
-                />
+                <input type="radio" id="option1" name="options" value="Green" />
                 <label for="option1" class="radio-labels radio-label-1"
                   >Low</label
                 >
@@ -77,19 +84,14 @@
                   type="radio"
                   id="option2"
                   name="options"
-                  value="option2"
+                  value="Yellow"
                 />
 
                 <label for="option2" class="radio-labels radio-label-2"
                   >Medium</label
                 >
 
-                <input
-                  type="radio"
-                  id="option3"
-                  name="options"
-                  value="option3"
-                />
+                <input type="radio" id="option3" name="options" value="Red" />
 
                 <label for="option3" class="radio-labels radio-label-3"
                   >High</label
@@ -101,6 +103,9 @@
               </div>
             </div>
           </div>
+
+          <!-- Add Task Bottom RIGHT-Container For NOTES -->
+
           <div class="Prompt-right-container-Note hidden">
             <div class="Prompt-right-container-Note-form">
               <input
@@ -125,9 +130,14 @@
         </div>
       </div>
 
-      <!-- Edit-Container -->
+      <!-- EDIT Prompt -->
+
       <div class="Add-Task-Prompt edit-container hidden">
+        <!-- EDIT PROMPT BOTTOM CONTAINER -->
+
         <div class="Bottom-container edit">
+          <!-- EDIT PROMPT BOTTOM CONTAINER RIGHT SIDE -->
+
           <div class="Prompt-right-container-To-Do edit-To-Do">
             <div class="edit-close-container">
               <input
@@ -148,8 +158,14 @@
             ></textarea>
 
             <div class="date">
-              <label for="Create-Note-Due-Date">Date :</label>
-              <input type="Date" name="Due-date" class="Due-date" id="Create-Note-Due-Date-forEdit" />
+              <label for="Create-Note-Due-Date-forEdit">Date :</label>
+              <input
+                type="Date"
+                name="Due-date"
+                class="Due-date"
+                id="Create-Note-Due-Date-forEdit"
+                value="2024-01-01"
+              />
             </div>
 
             <div class="Prompt-form-To-Do">
@@ -157,56 +173,81 @@
                 <p class="priorities-select-text">Priorities:</p>
                 <input
                   type="radio"
-                  id="option1"
+                  id="option1-forEdit"
                   name="options-forEdit"
-                  value="Low"
+                  value="Green"
                 />
-                <label for="option1" class="radio-labels radio-label-1"
+                <label for="option1-forEdit" class="radio-labels radio-label-1"
                   >Low</label
                 >
 
                 <input
                   type="radio"
-                  id="option2"
+                  id="option2-forEdit"
                   name="options-forEdit"
-                  value="Medium"
+                  value="Yellow"
                 />
-
-                <label for="option2" class="radio-labels radio-label-2"
+                <label for="option2-forEdit" class="radio-labels radio-label-2"
                   >Medium</label
                 >
 
                 <input
                   type="radio"
-                  id="option3"
+                  id="option3-forEdit"
                   name="options-forEdit"
-                  value="High"
+                  value="Red"
                 />
-
-                <label for="option3" class="radio-labels radio-label-3"
+                <label for="option3-forEdit" class="radio-labels radio-label-3"
                   >High</label
                 >
               </div>
 
               <div class="Prompt-form-Submit-To-Do">
-                <input type="submit" value="Confirm Edit" class="update-button"/>
+                <input
+                  type="submit"
+                  value="Confirm Edit"
+                  class="update-button"
+                />
               </div>
             </div>
           </div>
         </div>
       </div>
+
+      <!-- DETAILS PROMPT -->
+
+      <div class="details-container hidden">
+        <div class="cross-Details">X</div>
+
+        <h2 class="details-heading"></h2>
+
+        <div class="details-content">
+          <div class="details-Description"></div>
+
+          <div class="details-date"></div>
+        </div>
+      </div>
+
       <!-- Main-Container -->
 
       <div class="container">
+        <!-- MAIN CONTAINER NAVBAR -->
+
         <div class="navbar">
           <p class="nav-heading">/ / TO-DO</p>
           <img src="Images/checklist.png" alt="To-Do-icon" class="To-Do-icon" />
         </div>
 
+        <!-- MAIN COONTAINER BOTTOM CONTAINER -->
+
         <div class="Bottom-container">
+          <!-- MAIN COONTAINER BOTTOM LEFT CONTAINER -->
+
           <div class="left-container">
+            <!-- MAIN COONTAINER BOTTOM LEFT CONTAINER CONTENTS -->
+
             <div class="left-Upper-contents">
-              <ul>
+              <ul class="Main-container-left-ul">
                 <li class="Home">
                   <span class="Home-Name">Home</span
                   ><span class="Home-count"></span>
@@ -226,16 +267,26 @@
                 </li>
               </ul>
             </div>
+
+            <!-- MAIN COONTAINER BOTTOM LEFT CONTAINER TO DO PROMPT BUTTON -->
+
             <div class="left-lower-contents">+</div>
           </div>
+
+          <!-- MAIN COONTAINER BOTTOM CONTAINER RIGHT CONTAINER -->
+
           <div class="right-container">
             <ul class="home-tasks-notes"></ul>
             <ul class="today-tasks-content hidden"></ul>
             <ul class="weekly-tasks-content hidden"></ul>
-            <ul class="notes-content hidden"></ul>
+            <ul class="notes-content hidden">
+            </ul>
           </div>
         </div>
       </div>
+
+      <!-- DIV TO BLUR THE BACKGROUND -->
+
       <div class="blur hidden"></div>
     </div>
   </body>

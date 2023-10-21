@@ -1,3 +1,5 @@
+/* SHARED CSS */
+
 * {
   margin: 0;
   padding: 0;
@@ -6,177 +8,6 @@
   user-select: none;
 }
 
-/* Prompt Container */
-
-.Add-Task-Prompt {
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: 50%;
-  padding: 20px;
-  z-index: 2;
-}
-.edit-container{
-  left: 65%;
-}
-.edit-To-Do{
-  width: 40vw;
-}
-.close-edit{
-  font-size: 1.5rem;
-  color: #3ba395;
-  cursor: pointer;
-}
-
-.Add-Task-Prompt-Navbar {
-  width: 100%;
-  height: 18%;
-  background: #c38d95;
-  display: flex;
-  position: relative;
-}
-
-.Close-Prompt {
-  height: 1.5rem;
-  position: absolute;
-  right: 25px;
-  top: 12px;
-  cursor: pointer;
-}
-
-.Add-Task-Prompt-nav-heading {
-  padding: 10px;
-  font-size: 1.5rem;
-  color: white;
-  font-weight: bold;
-  letter-spacing: 3px;
-}
-
-.Prompt-right-container-To-Do {
-  display: flex;
-  flex-direction: column;
-  margin: 1.5rem;
-  /* row-gap: 2rem; */
-}
-
-.priorities-select-text {
-  display: inline-block;
-  margin-right: 5%;
-}
-
-#Create-Note-Title {
-  margin-bottom: 5%;
-  border: none;
-}
-
-#Create-Note-Description {
-  height: 40%;
-  border: none;
-}
-
-#Create-Note-Title-forNote {
-  margin-bottom: 5%;
-  border: none;
-}
-
-#Create-Note-Description-forNote {
-  height: 40%;
-  border: none;
-}
-
-.date {
-  margin-top: 20%;
-  margin-bottom: 5%;
-}
-
-.Priorities {
-  width: 75%;
-}
-
-#Create-Note-Due-Date {
-  width: 28%;
-  border: 1px solid #3ba395;
-  color: #3ba395;
-}
-
-.Prompt-form-To-Do {
-  display: flex;
-  justify-content: space-between;
-}
-
-input[type="radio"] {
-  display: none;
-}
-
-label {
-  display: inline-block;
-}
-
-.radio-labels {
-  width: 19%;
-  text-align: center;
-  border-radius: 5px;
-}
-
-.radio-label-1 {
-  border: 2px solid green;
-  color: green;
-}
-
-.radio-label-2 {
-  border: 2px solid yellow;
-  color: yellow;
-}
-
-.radio-label-3 {
-  border: 2px solid red;
-  color: red;
-}
-
-input[type="radio"]:checked + .radio-label-1{
-  color: white;
-  background-color: green;
-}
-
-input[type="radio"]:checked + .radio-label-2{
-  color: white;
-  background-color: yellow;
-}
-
-input[type="radio"]:checked + .radio-label-3{
-  color: white;
-  background-color: red;
-}
-
-input[type="submit"] {
-  color: #3ba395;
-  background-color: transparent;
-  border: 1px solid #3ba395;
-  border-radius: 20px;
-  width: 100%;
-}
-
-.Prompt-right-container-Note-form {
-  margin: 5%;
-  height: 25vh;
-  display: flex;
-  flex-direction: column;
-}
-.Prompt-form-Submit-To-Do {
-  width: 20%;
-}
-
-.Prompt-form-Submit-Note {
-  width: 25%;
-  margin: 5%;
-}
-
-.hidden {
-  display: none;
-}
-/* Main Container */
-
 #wrapper {
   height: 100vh;
   width: 100vw;
@@ -184,9 +15,8 @@ input[type="submit"] {
   position: relative;
 }
 
-.container {
-  height: 100%;
-  margin: auto;
+.hidden {
+  display: none !important;
 }
 
 .blur {
@@ -195,39 +25,8 @@ input[type="submit"] {
   right: 0;
   height: 100vh;
   width: 100vw;
-  backdrop-filter: blur(5px);
+  backdrop-filter: blur(8px);
   z-index: 1;
-}
-
-.edit-close-container{
-  display: flex;
-  justify-content: space-between;
-}
-
-.navbar {
-  width: 100%;
-  height: 8%;
-  background: #c38d95;
-  display: flex;
-  overflow-y: hidden;
-  position: relative;
-}
-
-.nav-heading {
-  height: 55px;
-  padding: 10px;
-  font-size: 2rem;
-  width: 200px;
-  color: white;
-  font-weight: bold;
-  overflow-y: hidden;
-  letter-spacing: 3px;
-}
-
-.To-Do-icon {
-  height: 40px;
-  width: 50px;
-  margin: auto -35px;
 }
 
 .Bottom-container {
@@ -260,9 +59,371 @@ input[type="submit"] {
   list-style: none;
 }
 
-.left-Upper-contents ul li:hover {
-  transform: scale(1.3);
+.left-Upper-contents ul li:hover,
+.selected_value {
+  color: #c38d95;
+  font-weight: 900;
+}
+
+.Prompt-right-container-To-Do {
+  display: flex;
+  flex-direction: column;
+  margin: 1.5rem;
+}
+
+.radio-labels {
+  width: 19%;
+  text-align: center;
+  border-radius: 5px;
+}
+
+.radio-label-1 {
+  border: 2px solid green;
+  color: green;
+}
+
+.radio-label-2 {
+  border: 2px solid yellow;
+  color: yellow;
+}
+
+.radio-label-3 {
+  border: 2px solid red;
+  color: red;
+}
+
+input[type="radio"]:checked + .radio-label-1 {
+  color: white;
+  background-color: green;
+}
+
+input[type="radio"]:checked + .radio-label-2 {
+  color: white;
+  background-color: yellow;
+}
+
+input[type="radio"]:checked + .radio-label-3 {
+  color: white;
+  background-color: red;
+}
+
+.radio-label-1:hover {
+  color: white;
+  background-color: green;
+}
+
+.radio-label-2:hover {
+  color: white;
+  background-color: yellow;
+}
+
+.radio-label-3:hover {
+  color: white;
+  background-color: red;
+}
+
+input[type="radio"] {
+  display: none;
+}
+
+label {
+  display: inline-block;
+}
+
+input[type="submit"] {
+  color: #3ba395;
+  background-color: transparent;
+  border: 1px solid #3ba395;
+  border-radius: 20px;
+  width: 100%;
+}
+
+.date {
+  margin-top: 20%;
+  margin-bottom: 5%;
+}
+
+#Create-Note-Due-Date {
+  width: 28%;
+  border: 1px solid #3ba395;
+  color: #3ba395;
+}
+
+.Prompt-form-To-Do {
+  display: flex;
+  justify-content: space-between;
+}
+
+.Priorities {
+  width: 75%;
+}
+
+.priorities-select-text {
+  display: inline-block;
+  margin-right: 5%;
+}
+
+.right-container {
+  width: 100%;
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
+.right-container ul li {
+  position: relative;
+  list-style: none;
+  font-size: 1.3rem;
+  margin: 3% auto;
+  user-select: none;
+  cursor: pointer;
+  width: 95%;
+  height: 6vh;
+  align-items: center;
+  display: flex;
+  box-shadow: 4px 4px 10px 2px #888888;
+}
+
+.right-container ul li::before {
+  content: "";
+  height: 60%;
+  width: 27px;
+  border-radius: 50%;
+  background-image: url(Images/unchecked.png);
+  background-size: cover;
+  margin: 0% 2%;
+  vertical-align: middle;
+}
+
+.right-container ul li.checked {
+  color: #878787;
+  text-decoration: line-through;
+}
+
+.right-container ul li.checked::before {
+  background-image: url(Images/checked.png);
+}
+
+/* ADD TASK PROMPT CSS */
+
+.Add-Task-Prompt {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 50%;
+  padding: 20px;
+  z-index: 2;
+}
+
+.Add-Task-Prompt-Navbar {
+  width: 100%;
+  height: 18%;
+  background: #c38d95;
+  display: flex;
+  position: relative;
+}
+
+.Add-Task-Prompt-nav-heading {
+  padding: 10px;
+  font-size: 1.5rem;
+  color: white;
   font-weight: bold;
+  letter-spacing: 3px;
+}
+
+.Close-Prompt {
+  height: 1.5rem;
+  position: absolute;
+  right: 25px;
+  top: 12px;
+  cursor: pointer;
+}
+
+#Create-Note-Title {
+  margin-bottom: 5%;
+  border: none;
+}
+
+#Create-Note-Description {
+  height: 40%;
+  border: none;
+}
+
+.Prompt-right-container-Note-form {
+  margin: 5%;
+  height: 25vh;
+  display: flex;
+  flex-direction: column;
+}
+
+#Create-Note-Title-forNote,
+#Create-Note-Title-forEdit {
+  margin-bottom: 5%;
+  border: none;
+}
+
+#Create-Note-Description-forNote,
+#Create-Note-Description-forEdit {
+  height: 40%;
+  border: none;
+}
+
+.Prompt-form-Submit-Note {
+  width: 25%;
+  margin: 5%;
+}
+
+/* EDIT PROMPT CSS */
+
+.edit-container {
+  left: 65%;
+}
+
+.edit-To-Do {
+  width: 40vw;
+}
+
+.edit-close-container {
+  display: flex;
+  justify-content: space-between;
+}
+
+.close-edit {
+  font-size: 1.5rem;
+  color: #3ba395;
+  cursor: pointer;
+}
+
+/* DETAIL CONTAINER CSS */
+
+.details-container {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 50%;
+  padding: 20px;
+  z-index: 2;
+  background-color: #a5a5a5;
+  line-height: 2rem;
+}
+
+.cross-Details {
+  position: absolute;
+  right: 2rem;
+}
+
+/* Note Container */
+
+.notes-content {
+  height: 90vh;
+  width: 100vw;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.Note-container {
+  width: 24%;
+  height: 40%;
+  background-color: white;
+  margin: 15px;
+  margin-top: 25px;
+  border: 2px solid black;
+  overflow-y: auto
+}
+
+.noteUpperContainer {
+  display: flex;
+  /* justify-content: space-between; */
+  /* align-items: center; */
+  position: relative;
+}
+
+.Note-Title {
+  word-wrap: break-word;
+  padding: 1rem;
+  font-weight: bold;
+  text-decoration: underline;
+  font-size: 1.5rem;
+  max-width: 68%;
+}
+
+.Note-Desc {
+  height: 75%;
+}
+
+.Note-Desc textarea {
+  border: none;
+  width: 100%;
+  height: 100%;
+  resize: none;
+  padding: 10px;
+  font-size: 18px;
+}
+
+div[contenteditable="true"]:focus {
+  outline: none; 
+}
+
+.Update-Data-Note {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  width: 30px;
+  height: 30px;
+  font-size: 1.25rem;
+  color: #555;
+  border-radius: 50%;
+  margin-right: 2rem;
+}
+
+.image-size {
+  width: 25px;
+  height: 25px;
+}
+
+.Cross-Note {
+  position: absolute;
+  top: 20px;
+  right: 5px;
+  width: 30px;
+  height: 30px;
+  font-size: 1.5rem;
+  color: #555;
+  border-radius: 50%;
+}
+
+/* Main Container */
+
+.container {
+  height: 100%;
+  margin: auto;
+}
+
+.navbar {
+  width: 100%;
+  height: 8%;
+  background: #c38d95;
+  display: flex;
+  overflow-y: hidden;
+  position: relative;
+}
+
+.nav-heading {
+  height: 55px;
+  padding: 10px;
+  font-size: 2rem;
+  width: 200px;
+  color: white;
+  font-weight: bold;
+  overflow-y: hidden;
+  letter-spacing: 3px;
+}
+
+.To-Do-icon {
+  height: 40px;
+  width: 50px;
+  margin: auto -35px;
 }
 
 .left-lower-contents {
@@ -281,29 +442,14 @@ input[type="submit"] {
   cursor: pointer;
 }
 
-.right-container {
-  width: 100%;
+/* CSS FROM JS TAGS */
+
+.list-item-with-border {
+  border-left: 5px solid;
+  border-left-color: var(--border-color, Green);
 }
 
-.right-container ul {
-  margin: 6%;
-}
-
-.right-container ul li {
-  position: relative;
-  list-style: none;
-  font-size: 1.3rem;
-  margin: 3% auto;
-  user-select: none;
-  cursor: pointer;
-  width: 95%;
-  height: 6vh;
-  align-items: center;
-  display: flex;
-  box-shadow: 4px 4px 10px 2px #888888;
-}
-
-.Cross{
+.Cross {
   position: absolute;
   right: 15px;
   top: 6px;
@@ -316,44 +462,59 @@ input[type="submit"] {
   border-radius: 50%;
 }
 
-.Cross:hover{
+.Cross:hover {
   background: #edeef0;
 }
 
-.right-container ul li::before {
-  content: "";
-  height: 60%;
-  width: 27px;
-  border-radius: 50%;
-  background-image: url(Images/unchecked.png);
-  background-size: cover;
-  margin: 0% 2%;
-}
-
-.Update-Data{
-  right: 45px;
+.Li-Date {
   position: absolute;
-  /* right: 15px; */
-  top: 10px;
-  width: 20px;
-  height: 20px;
-  /* font-size: 1.25rem; */
+  right: 100px;
+  top: 6px;
+  width: 100px;
+  height: 30px;
+  font-size: 1.25rem;
   color: #555;
   line-height: 30px;
   text-align: center;
-  /* border-radius: 50%; */
+  border-radius: 50%;
+}
+
+.Update-Data {
+  position: absolute;
+  right: 56px;
+  top: 10px;
+  width: 20px;
+  height: 20px;
+  font-size: 1.25rem;
+  color: #555;
+  line-height: 30px;
+  text-align: center;
+  border-radius: 50%;
   font-size: 0.9rem;
 }
 
-.Update-Data:hover{
+.Update-Data:hover {
   background: #edeef0;
 }
 
-.right-container ul li.checked {
-  color: #878787;
-  text-decoration: line-through;
+.Details-ToDo {
+  right: 220px;
+  position: absolute;
+  top: 8px;
+  width: 74px;
+  height: 25px;
+  font-size: 1.25rem;
+  color: #3ba395;
+  border: 2px solid #3ba395;
+  line-height: 22px;
+  text-align: center;
+  border-radius: 5%;
+  font-size: 1.2rem;
 }
 
-.right-container ul li.checked::before{
-  background-image: url(Images/checked.png);
+.Details-ToDo:hover {
+  background-color: #3ba395;
+  color: white;
 }
+
+/* DONE TILL HERE */
