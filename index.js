@@ -13,6 +13,7 @@ let InputBoxTitle = document.querySelector("#Create-Note-Title");
 let InputBoxDesc = document.querySelector("#Create-Note-Description");
 let priority = document.querySelectorAll('[name="options"]');
 let FormDueDate = document.querySelector("#Create-Note-Due-Date");
+let Add_to_do_details_Microphone = document.querySelector(".Add-to-do-details_Microphone");
 
 // EDIT CONTAINER SELECTORS
 
@@ -27,6 +28,7 @@ let updateButton = document.querySelector(".update-button");
 let FormDueDateForEdit = document.querySelector(
   "#Create-Note-Due-Date-forEdit"
 );
+let Edit_Desc_Microphone = document.querySelector(".Edit-desc-Microphone");
 
 // NOTE CONTAINER SELECTORS
 
@@ -35,7 +37,7 @@ let InputBoxTitleForNote = document.querySelector("#Create-Note-Title-forNote");
 let InputBoxDescForNote = document.querySelector(
   "#Create-Note-Description-forNote"
 );
-
+let Add_Note_Microphone = document.querySelector(".Add-Note-Microphone");
 //DETAIL CONTAINER SELECTORS
 
 let DetailsContainer = document.querySelector(".details-container");
@@ -582,3 +584,33 @@ function attachClickListener(content) {
     }
   });
 }
+
+Add_to_do_details_Microphone.addEventListener("click", function () {
+  var recognition = new webkitSpeechRecognition();
+  recognition.lang = "en-GB";
+  recognition.onresult = function(event) {
+    console.log(event.results[0][0].transcript);
+    InputBoxDesc.innerText = event.results[0][0].transcript;
+  };
+  recognition.start();
+});
+
+Add_Note_Microphone.addEventListener("click", function () {
+  var recognition = new webkitSpeechRecognition();
+  recognition.lang = "en-GB";
+  recognition.onresult = function(event) {
+    console.log(event.results[0][0].transcript);
+    InputBoxDescForNote.innerText = event.results[0][0].transcript;
+  };
+  recognition.start();
+});
+
+Edit_Desc_Microphone.addEventListener("click", function () {
+  var recognition = new webkitSpeechRecognition();
+  recognition.lang = "en-GB";
+  recognition.onresult = function(event) {
+    console.log(event.results[0][0].transcript);
+    InputBoxDescForEdit.value = event.results[0][0].transcript;
+  };
+  recognition.start();
+});
