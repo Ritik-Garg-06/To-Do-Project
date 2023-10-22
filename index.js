@@ -53,6 +53,10 @@ let TodayTab = document.querySelector(".Today-task-Name");
 let WeekTab = document.querySelector(".Weekly-Tasks-Name");
 let NotesTab = document.querySelector(".Notes-Name");
 let HomeTab_Content = document.querySelector(".home-tasks-notes");
+let HomeTab_Count = document.querySelector(".Home-count");
+let TodayTab_Count = document.querySelector(".Today-count");
+let WeeklyTab_Count = document.querySelector(".Weekly-count");
+let NotesTab_Count = document.querySelector(".Notes-count");
 let TodayTab_Content = document.querySelector(".today-tasks-content");
 let WeekTab_Content = document.querySelector(".weekly-tasks-content");
 let NotesTab_Content = document.querySelector(".notes-content");
@@ -88,7 +92,6 @@ function switchTab(contentList, tabi) {
 }
 
 let tasks = [];
-
 function addToDo() {
   if (InputBoxTitle.value === "") {
     alert("You must write something!");
@@ -104,6 +107,7 @@ function addToDo() {
         break;
       }
     }
+
     const taskDueDate = FormDueDate.value;
 
     const newTask = {
@@ -127,6 +131,32 @@ function addToDo() {
 
     const li = document.createElement("li");
     li.textContent = newTask.title;
+
+    if (tasks.length != 0) {
+      HomeTab_Count.innerText = tasks.length;
+    } else {
+      HomeTab_Count.innerText = "";
+    }
+
+    if (tasks.filter((task) => task.category === "Today").length != 0) {
+      TodayTab_Count.innerText = tasks.filter(
+        (task) => task.category === "Today"
+      ).length;
+    }
+
+    if (tasks.filter((task) => task.category === "Week").length != 0) {
+      WeeklyTab_Count.innerText = tasks.filter(
+        (task) => task.category === "Week"
+      ).length;
+    }
+
+    if (tasks.filter((task) => task.category === "Today").length == 0) {
+      TodayTab_Count.innerText = "";
+    }
+
+    if (tasks.filter((task) => task.category === "Week").length == 0) {
+      WeeklyTab_Count.innerText = "";
+    }
 
     li.dataset.index = taskIndex;
 
@@ -153,7 +183,17 @@ function addToDo() {
     li.classList.add("list-item-with-border");
     li.style.setProperty("--border-color", selectedValue);
 
-    curr_content.appendChild(li);
+    if (curr_tab == TodayTab) {
+      HomeTab_Content.appendChild(li);
+      var liClone = li.cloneNode(true);
+      TodayTab_Content.appendChild(liClone);
+    } else if (curr_tab == WeekTab) {
+      HomeTab_Content.appendChild(li);
+      var liClone2 = li.cloneNode(true);
+      WeekTab_Content.appendChild(liClone2);
+    } else if (curr_tab == HomeTab) {
+      HomeTab_Content.appendChild(li);
+    }
   }
 
   InputBoxTitle.value = "";
@@ -166,7 +206,6 @@ function addToDo() {
 }
 
 let notes = [];
-// ... (Your existing code)
 
 function addNote() {
   if (InputBoxTitleForNote.value === "") {
@@ -184,7 +223,10 @@ function addNote() {
 
     notes.push(newNote);
 
-    noteIndex = notes.length - 1; // Updated noteIndex
+    noteIndex = notes.length - 1;
+
+    NotesTab_Count.innerText = notes.length;
+    console.log(notes.length);
 
     const noteDiv = document.createElement("div");
     const noteUpperContainer = document.createElement("div");
@@ -201,8 +243,8 @@ function addNote() {
     noteDesc.contentEditable = true;
     noteUpperContainer.classList.add("noteUpperContainer");
 
-    noteTitle.textContent = newNote.title; // Use newNote instead of newTask
-    noteDesc.textContent = newNote.description; // Use newNote instead of newTask
+    noteTitle.textContent = newNote.title;
+    noteDesc.textContent = newNote.description;
 
     noteDiv.dataset.index = noteIndex;
 
@@ -231,8 +273,12 @@ function addNote() {
 
 function renderNote() {
   NotesTab_Content.innerHTML = "";
-
+  if (notes.length == "0") {
+    NotesTab_Count.innerText = "";
+  }
+  NotesTab_Count.innerText = notes.length;
   notes.forEach((note, index) => {
+    console.log(notes.length);
     const noteDiv = document.createElement("div");
     const noteUpperContainer = document.createElement("div");
     const noteTitle = document.createElement("div");
@@ -271,9 +317,6 @@ function renderNote() {
   });
 }
 
-// ... (Your existing code)
-
-
 function deleteNote(index) {
   notes.splice(index, 1);
   renderNote();
@@ -281,79 +324,106 @@ function deleteNote(index) {
 
 function deleteTask(index) {
   tasks.splice(index, 1);
-  renderTasks(
-    curr_tab.classList.contains("Home-Name")
-      ? "Home"
-      : curr_tab.classList.contains("Today-task-Name")
-      ? "Today"
-      : "Week"
-  );
+  renderTasks();
 }
+function renderTasks() {
+  // Clear all category containers
+  HomeTab_Content.innerHTML = "";
+  TodayTab_Content.innerHTML = "";
+  WeekTab_Content.innerHTML = "";
 
-function renderTasks(category) {
-  const taskList = curr_content;
-  taskList.innerHTML = "";
+  if (tasks.length != 0) {
+    HomeTab_Count.innerText = tasks.length;
+  } else {
+    HomeTab_Count.innerText = "";
+  }
 
-  tasks
-    .filter((task) => task.category === category)
-    .forEach((task, index) => {
-      const li = document.createElement("li");
-      li.textContent = task.title;
-      let selectedValue = task.priority;
-      li.dataset.index = index;
+  if (tasks.filter((task) => task.category === "Today").length != 0) {
+    TodayTab_Count.innerText = tasks.filter(
+      (task) => task.category === "Today"
+    ).length;
+  }
 
-      const span1 = document.createElement("span");
-      span1.innerHTML = '<img src="Images/edit.png" class="Update-Data"/>';
+  if (tasks.filter((task) => task.category === "Week").length != 0) {
+    WeeklyTab_Count.innerText = tasks.filter(
+      (task) => task.category === "Week"
+    ).length;
+  }
 
-      const span2 = document.createElement("span");
-      span2.innerText = "\u00d7";
-      span2.classList.add("Cross");
+  if (tasks.filter((task) => task.category === "Today").length == 0) {
+    TodayTab_Count.innerText = "";
+  }
 
-      const span3 = document.createElement("span");
-      span3.innerText = task.dueDate;
-      span3.classList.add("Li-Date");
+  if (tasks.filter((task) => task.category === "Week").length == 0) {
+    WeeklyTab_Count.innerText = "";
+  }
 
-      const span4 = document.createElement("div");
-      span4.innerText = "Details";
-      span4.classList.add("Details-ToDo");
+  tasks.forEach((task, index) => {
+    const li = document.createElement("li");
+    li.textContent = task.title;
+    let selectedValue = task.priority;
+    li.dataset.index = index;
 
-      li.appendChild(span1);
-      li.appendChild(span2);
-      li.appendChild(span3);
-      li.appendChild(span4);
+    const span1 = document.createElement("span");
+    span1.innerHTML = '<img src="Images/edit.png" class="Update-Data"/>';
 
-      if (!li.classList.contains("list-item-with-border")) {
-        li.classList.add("list-item-with-border");
-        li.style.setProperty("--border-color", selectedValue);
-      }
-      if (task.checked == true) {
-        li.classList.add("checked");
-      }
+    const span2 = document.createElement("span");
+    span2.innerText = "\u00d7";
+    span2.classList.add("Cross");
 
-      taskList.appendChild(li);
-    });
+    const span3 = document.createElement("span");
+    span3.innerText = task.dueDate;
+    span3.classList.add("Li-Date");
+
+    const span4 = document.createElement("div");
+    span4.innerText = "Details";
+    span4.classList.add("Details-ToDo");
+
+    li.appendChild(span1);
+    li.appendChild(span2);
+    li.appendChild(span3);
+    li.appendChild(span4);
+
+    if (!li.classList.contains("list-item-with-border")) {
+      li.classList.add("list-item-with-border");
+      li.style.setProperty("--border-color", selectedValue);
+    }
+    if (task.checked == true) {
+      li.classList.add("checked");
+    }
+
+    if (task.category === "Home") {
+      HomeTab_Content.appendChild(li);
+    } else if (task.category === "Week") {
+      WeekTab_Content.appendChild(li);
+      var liClone2 = li.cloneNode(true);
+      HomeTab_Content.appendChild(liClone2);
+    } else if (task.category === "Today") {
+      TodayTab_Content.appendChild(li);
+      var liClone = li.cloneNode(true);
+      HomeTab_Content.appendChild(liClone);
+    }
+  });
 }
 
 function promptadd() {
   blur.classList.remove("hidden");
   prompt.classList.remove("hidden");
-  if(curr_tab == NotesTab){
-    if(Prompt_add_Note.classList.contains("hidden")){
+  if (curr_tab == NotesTab) {
+    if (Prompt_add_Note.classList.contains("hidden")) {
       Prompt_add_Note.classList.remove("hidden");
     }
     Prompt_add_To_do.classList.add("hidden");
     To_Do_container.classList.add("hidden");
     Note_container.classList.remove("hidden");
-  }
-  else{
-    if(Prompt_add_To_do.classList.contains("hidden")){
+  } else {
+    if (Prompt_add_To_do.classList.contains("hidden")) {
       Prompt_add_To_do.classList.remove("hidden");
     }
     Prompt_add_Note.classList.add("hidden");
     To_Do_container.classList.remove("hidden");
     Note_container.classList.add("hidden");
   }
-
 }
 
 function ClosePrompt() {
@@ -382,7 +452,6 @@ function handleItemClick(e) {
     e.target.parentElement.remove();
   }
 }
-// Function to edit a task
 function editToDo(taskIndex) {
   const modifiedTitle = InputBoxTitleForEdit.value;
   const modifiedDescription = InputBoxDescForEdit.value;
@@ -416,7 +485,6 @@ function editToDo(taskIndex) {
   CloseEdit();
 }
 
-// Modify the "openEdit" function to call "setupEditPrompt"
 function openEdit(taskIndex) {
   const task = tasks[taskIndex];
   InputBoxTitleForEdit.value = task.title;
@@ -429,7 +497,6 @@ function openEdit(taskIndex) {
     }
   }
 
-  // Add an event listener to the "Update" button
   updateButton.addEventListener("click", function () {
     editToDo(taskIndex);
   });
@@ -513,14 +580,5 @@ function attachClickListener(content) {
         openDetails(listItem.dataset.index);
       }
     }
-    
-    // if (e.target.classList.contains("Cross-Note")) {
-    //   const noteDiv = e.target.closest(".Note-container");
-    //   if (noteDiv) {
-    //     const noteIndex = noteDiv.dataset.index;
-    //     deleteNote(noteIndex);
-    //   }
-    // }
   });
 }
-

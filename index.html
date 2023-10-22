@@ -52,13 +52,20 @@
               placeholder="Title: Pay Bills"
             />
 
-            <textarea
-              id="Create-Note-Description"
-              name="Description"
-              rows="4"
-              cols="50"
-              placeholder="Details: e.g. internet,phone,rent."
-            ></textarea>
+            <div class="input-desc-mike">
+              <textarea
+                id="Create-Note-Description"
+                name="Description"
+                rows="4"
+                cols="50"
+                placeholder="Details: e.g. internet,phone,rent."
+              ></textarea>
+              <img
+                src="Images/voice-recognition.png"
+                alt="Microphone"
+                class="Microphone"
+              />
+            </div>
 
             <div class="date">
               <label for="Create-Note-Due-Date">Date :</label>
@@ -115,13 +122,20 @@
                 placeholder="Title: "
               />
 
-              <textarea
-                id="Create-Note-Description-forNote"
-                name="Description"
-                rows="4"
-                cols="50"
-                placeholder="Details: "
-              ></textarea>
+              <div class="Note-Desc-Mike">
+                <textarea
+                  id="Create-Note-Description-forNote"
+                  name="Description"
+                  rows="4"
+                  cols="50"
+                  placeholder="Details: "
+                ></textarea>
+                <img
+                  src="Images/voice-recognition.png"
+                  alt="Microphone"
+                  class="Microphone"
+                />
+              </div>
             </div>
             <div class="Prompt-form-Submit-Note">
               <input type="submit" value="Create Note" onclick="addNote()" />
@@ -149,13 +163,20 @@
               <p class="close-edit">x</p>
             </div>
 
-            <textarea
-              id="Create-Note-Description-forEdit"
-              name="Description"
-              rows="4"
-              cols="50"
-              placeholder="Details: e.g. internet,phone,rent."
-            ></textarea>
+            <div class="to-do-edit-desc-mike">
+              <textarea
+                id="Create-Note-Description-forEdit"
+                name="Description"
+                rows="4"
+                cols="50"
+                placeholder="Details: e.g. internet,phone,rent."
+              ></textarea>
+              <img
+                src="Images/voice-recognition.png"
+                alt="Microphone"
+                class="Microphone"
+              />
+            </div>
 
             <div class="date">
               <label for="Create-Note-Due-Date-forEdit">Date :</label>
@@ -250,20 +271,20 @@
               <ul class="Main-container-left-ul">
                 <li class="Home">
                   <span class="Home-Name">Home</span
-                  ><span class="Home-count"></span>
+                  ><span class="Home-count counter"></span>
                 </li>
                 <li class="Tasks"><span class="Tasks-Name">Tasks</span></li>
                 <li class="Today">
                   <span class="Today-task-Name">Today</span
-                  ><span class="Today-count"></span>
+                  ><span class="Today-count counter"></span>
                 </li>
                 <li class="Weekly-Tasks">
                   <span class="Weekly-Tasks-Name">Week</span
-                  ><span class="Today-Tasks-count"></span>
+                  ><span class="Weekly-count counter"></span>
                 </li>
                 <li class="Notes">
                   <span class="Notes-Name">Notes</span
-                  ><span class="Notes-count"></span>
+                  ><span class="Notes-count counter"></span>
                 </li>
               </ul>
             </div>
@@ -279,8 +300,7 @@
             <ul class="home-tasks-notes"></ul>
             <ul class="today-tasks-content hidden"></ul>
             <ul class="weekly-tasks-content hidden"></ul>
-            <ul class="notes-content hidden">
-            </ul>
+            <ul class="notes-content hidden"></ul>
           </div>
         </div>
       </div>
