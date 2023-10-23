@@ -8,11 +8,35 @@
   user-select: none;
 }
 
+:root{
+  --purple : #c38d95;
+  --light-grey : #eee;
+  --blue : #3ba395;
+  --black : #555;
+}
+
+.dark-theme{
+  --purple : #2d4356;
+  --light-grey : #435b66;
+  --blue : #5c5470; 
+  --black : #C2D9FF;
+}
+
 #wrapper {
   height: 100vh;
   width: 100vw;
   overflow: hidden;
   position: relative;
+}
+
+.theme{
+  position: absolute;
+  right: 40px;
+  top: 10px;
+}
+
+.theme-img{
+  height: 35px;
 }
 
 .hidden {
@@ -37,7 +61,7 @@
 }
 
 .left-container {
-  background-color: #eee;
+  background-color: var(--light-grey);
   width: 100%;
   display: flex;
   flex-direction: column;
@@ -49,6 +73,7 @@
 .left-Upper-contents {
   width: 100%;
   height: 60%;
+  color: var(--black);
 }
 
 .left-Upper-contents ul li {
@@ -61,7 +86,7 @@
 
 .left-Upper-contents ul li:hover,
 .selected_value {
-  color: #c38d95;
+  color:var(--purple);
   font-weight: 900;
 }
 
@@ -131,9 +156,9 @@ label {
 }
 
 input[type="submit"] {
-  color: #3ba395;
+  color: var(--blue);
   background-color: transparent;
-  border: 1px solid #3ba395;
+  border: 1px solid var(--blue);
   border-radius: 20px;
   width: 100%;
 }
@@ -145,8 +170,8 @@ input[type="submit"] {
 
 #Create-Note-Due-Date {
   width: 28%;
-  border: 1px solid #3ba395;
-  color: #3ba395;
+  border: 1px solid var(--blue);
+  color: var(--blue);
 }
 
 .Prompt-form-To-Do {
@@ -224,7 +249,7 @@ input[type="submit"] {
 .Add-Task-Prompt-Navbar {
   width: 100%;
   height: 18%;
-  background: #c38d95;
+  background: var(--purple);
   display: flex;
   position: relative;
 }
@@ -296,7 +321,7 @@ input[type="submit"] {
 
 .close-edit {
   font-size: 1.5rem;
-  color: #3ba395;
+  color: var(--blue);
   cursor: pointer;
 }
 
@@ -336,8 +361,8 @@ input[type="submit"] {
   margin-top: 25px;
   /* border: 2px solid black; */
   overflow-y: auto;
-  background-color: #eee;
-  color: #555;
+  background-color: var(--light-grey);
+  color: var(--black);
   
 }
 
@@ -414,7 +439,7 @@ div[contenteditable="true"]:focus {
 .navbar {
   width: 100%;
   height: 8%;
-  background: #c38d95;
+  background: var(--purple);
   display: flex;
   overflow-y: hidden;
   position: relative;
@@ -442,7 +467,7 @@ div[contenteditable="true"]:focus {
   height: 60px;
   width: 50px;
   border-radius: 50%;
-  background-color: #c38d95;
+  background-color: var(--purple);
   bottom: 15px;
   left: 5px;
   font-size: 2rem;
@@ -456,9 +481,9 @@ div[contenteditable="true"]:focus {
 .counter{
   position: absolute;
   right: 7%;
-  background-color: #c38d95;
+  background-color: var(--purple);
   border-radius: 50%;
-  color: #eee;
+  color: var(--light-grey);
   width: 6%;
   text-align: center;
 }
@@ -525,8 +550,8 @@ div[contenteditable="true"]:focus {
   width: 74px;
   height: 25px;
   font-size: 1.25rem;
-  color: #3ba395;
-  border: 2px solid #3ba395;
+  color: var(--blue)var(--blue);
+  border: 2px solid var(--blue);
   line-height: 22px;
   text-align: center;
   border-radius: 5%;
@@ -534,7 +559,7 @@ div[contenteditable="true"]:focus {
 }
 
 .Details-ToDo:hover {
-  background-color: #3ba395;
+  background-color: var(--blue);
   color: white;
 }
 

@@ -1,6 +1,8 @@
 //COMMON SELECTORS
 
 let blur = document.querySelector(".blur");
+let theme_img = document.querySelector(".theme-img");
+let theme = document.querySelector(".theme");
 
 // ADD TO-DO SELECTORS
 
@@ -75,6 +77,23 @@ curr_tab.classList.add("selected_value");
 let curr_content = HomeTab_Content;
 let taskIndex = 0;
 let noteIndex = 0;
+let curr_theme = "Day";
+
+theme.addEventListener("click",function(){
+  if(curr_theme == "Day")
+  {
+    theme.innerHTML = "<img src='Images/moon.png' alt='Night' class = 'theme-img'>";
+    document.body.classList.toggle("dark-theme");
+    curr_theme = "Night";
+    console.log(curr_theme);
+  }
+  else if(curr_theme == "Night"){
+    theme.innerHTML = '<img src="Images/sun (1).png" alt="Night" class = "theme-img">';
+    document.body.classList.toggle("dark-theme");
+    curr_theme = "Day";
+    console.log(curr_theme);
+  }
+})
 
 function switchTab(contentList, tabi) {
   ulElements.forEach((section) => {
@@ -275,10 +294,12 @@ function addNote() {
 
 function renderNote() {
   NotesTab_Content.innerHTML = "";
-  if (notes.length == "0") {
+  if (notes.length == 0) {
     NotesTab_Count.innerText = "";
   }
-  NotesTab_Count.innerText = notes.length;
+  else{
+    NotesTab_Count.innerText = notes.length;
+  }
   notes.forEach((note, index) => {
     console.log(notes.length);
     const noteDiv = document.createElement("div");
