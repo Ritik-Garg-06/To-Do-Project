@@ -335,7 +335,8 @@ input[type="submit"] {
   width: 50%;
   padding: 20px;
   z-index: 2;
-  background-color: #a5a5a5;
+  background-color: var(--light-grey);
+  color: var(--black);
   line-height: 2rem;
 }
 
@@ -481,7 +482,7 @@ div[contenteditable="true"]:focus {
 .counter{
   position: absolute;
   right: 7%;
-  background-color: var(--purple);
+  background-color: var(--black);
   border-radius: 50%;
   color: var(--light-grey);
   width: 6%;
@@ -550,7 +551,7 @@ div[contenteditable="true"]:focus {
   width: 74px;
   height: 25px;
   font-size: 1.25rem;
-  color: var(--blue)var(--blue);
+  color: var(--blue);
   border: 2px solid var(--blue);
   line-height: 22px;
   text-align: center;

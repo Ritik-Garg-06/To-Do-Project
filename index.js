@@ -15,7 +15,9 @@ let InputBoxTitle = document.querySelector("#Create-Note-Title");
 let InputBoxDesc = document.querySelector("#Create-Note-Description");
 let priority = document.querySelectorAll('[name="options"]');
 let FormDueDate = document.querySelector("#Create-Note-Due-Date");
-let Add_to_do_details_Microphone = document.querySelector(".Add-to-do-details_Microphone");
+let Add_to_do_details_Microphone = document.querySelector(
+  ".Add-to-do-details_Microphone"
+);
 
 // EDIT CONTAINER SELECTORS
 
@@ -78,22 +80,23 @@ let curr_content = HomeTab_Content;
 let taskIndex = 0;
 let noteIndex = 0;
 let curr_theme = "Day";
+let currentDate = new Date();
+let Default_date = currentDate.toISOString().split("T")[0];
 
-theme.addEventListener("click",function(){
-  if(curr_theme == "Day")
-  {
-    theme.innerHTML = "<img src='Images/moon.png' alt='Night' class = 'theme-img'>";
-    document.body.classList.toggle("dark-theme");
-    curr_theme = "Night";
-    console.log(curr_theme);
-  }
-  else if(curr_theme == "Night"){
-    theme.innerHTML = '<img src="Images/sun (1).png" alt="Night" class = "theme-img">';
+theme.addEventListener("click", function () {
+  if (curr_theme == "Night") {
+    theme.innerHTML =
+      "<img src='Images/moon.png' alt='Night' class = 'theme-img'>";
     document.body.classList.toggle("dark-theme");
     curr_theme = "Day";
     console.log(curr_theme);
+  } else if (curr_theme == "Day") {
+    theme.innerHTML =
+      '<img src="Images/sun (1).png" alt="Night" class = "theme-img">';
+    document.body.classList.toggle("dark-theme");
+    curr_theme = "Night";
   }
-})
+});
 
 function switchTab(contentList, tabi) {
   ulElements.forEach((section) => {
@@ -110,6 +113,24 @@ function switchTab(contentList, tabi) {
   });
   contentList.classList.remove("hidden");
   tabi.classList.add("selected_value");
+
+  if (tabi == TodayTab) {
+    FormDueDate.setAttribute("readonly", "true");
+    FormDueDate.value = Default_date;
+  } else {
+    FormDueDate.removeAttribute("readonly");
+  }
+
+  if (tabi == WeekTab) {
+
+    const maxDate = new Date();
+    maxDate.setDate(currentDate.getDate() + 7);
+
+    const maxDateStr = maxDate.toISOString().split("T")[0];
+
+    FormDueDate.min = Default_date;
+    FormDueDate.max = maxDateStr;
+  }
 }
 
 let tasks = [];
@@ -129,6 +150,9 @@ function addToDo() {
       }
     }
 
+    if (FormDueDate.value == "") {
+      FormDueDate.value = Default_date;
+    }
     const taskDueDate = FormDueDate.value;
 
     const newTask = {
@@ -296,8 +320,7 @@ function renderNote() {
   NotesTab_Content.innerHTML = "";
   if (notes.length == 0) {
     NotesTab_Count.innerText = "";
-  }
-  else{
+  } else {
     NotesTab_Count.innerText = notes.length;
   }
   notes.forEach((note, index) => {
@@ -609,7 +632,7 @@ function attachClickListener(content) {
 Add_to_do_details_Microphone.addEventListener("click", function () {
   var recognition = new webkitSpeechRecognition();
   recognition.lang = "en-GB";
-  recognition.onresult = function(event) {
+  recognition.onresult = function (event) {
     console.log(event.results[0][0].transcript);
     InputBoxDesc.innerText = event.results[0][0].transcript;
   };
@@ -619,7 +642,7 @@ Add_to_do_details_Microphone.addEventListener("click", function () {
 Add_Note_Microphone.addEventListener("click", function () {
   var recognition = new webkitSpeechRecognition();
   recognition.lang = "en-GB";
-  recognition.onresult = function(event) {
+  recognition.onresult = function (event) {
     console.log(event.results[0][0].transcript);
     InputBoxDescForNote.innerText = event.results[0][0].transcript;
   };
@@ -629,7 +652,7 @@ Add_Note_Microphone.addEventListener("click", function () {
 Edit_Desc_Microphone.addEventListener("click", function () {
   var recognition = new webkitSpeechRecognition();
   recognition.lang = "en-GB";
-  recognition.onresult = function(event) {
+  recognition.onresult = function (event) {
     console.log(event.results[0][0].transcript);
     InputBoxDescForEdit.value = event.results[0][0].transcript;
   };
