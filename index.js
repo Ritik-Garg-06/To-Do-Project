@@ -1,3 +1,7 @@
+
+document.addEventListener("DOMContentLoaded", function () {
+  loadTasksAndNotes();
+});
 //COMMON SELECTORS
 
 let blur = document.querySelector(".blur");
@@ -83,6 +87,21 @@ let curr_theme = "Day";
 let currentDate = new Date();
 let Default_date = currentDate.toISOString().split("T")[0];
 
+// Load tasks and notes from local storage on page load
+function loadTasksAndNotes() {
+  const storedTasks = localStorage.getItem("tasks");
+  if (storedTasks) {
+      tasks = JSON.parse(storedTasks);
+      renderTasks();
+  }
+
+  const storedNotes = localStorage.getItem("notes");
+  if (storedNotes) {
+      notes = JSON.parse(storedNotes);
+      renderNote();
+  }
+}
+
 theme.addEventListener("click", function () {
   if (curr_theme == "Night") {
     theme.innerHTML =
@@ -122,7 +141,6 @@ function switchTab(contentList, tabi) {
   }
 
   if (tabi == WeekTab) {
-
     const maxDate = new Date();
     maxDate.setDate(currentDate.getDate() + 7);
 
@@ -247,6 +265,8 @@ function addToDo() {
   for (radioButton of priority) {
     radioButton.checked = false;
   }
+
+  localStorage.setItem("tasks", JSON.stringify(tasks));
   ClosePrompt();
 }
 
@@ -312,7 +332,8 @@ function addNote() {
 
   InputBoxTitleForNote.value = "";
   InputBoxDescForNote.value = "";
-
+  
+  localStorage.setItem("notes", JSON.stringify(notes));
   ClosePrompt();
 }
 
@@ -366,11 +387,13 @@ function renderNote() {
 function deleteNote(index) {
   notes.splice(index, 1);
   renderNote();
+  localStorage.setItem("notes", JSON.stringify(notes));
 }
 
 function deleteTask(index) {
   tasks.splice(index, 1);
   renderTasks();
+  localStorage.setItem("tasks", JSON.stringify(tasks));
 }
 function renderTasks() {
   // Clear all category containers
@@ -527,7 +550,8 @@ function editToDo(taskIndex) {
       ? "Today"
       : "Week"
   );
-
+  
+  localStorage.setItem("tasks", JSON.stringify(tasks));
   CloseEdit();
 }
 
@@ -634,7 +658,7 @@ Add_to_do_details_Microphone.addEventListener("click", function () {
   recognition.lang = "en-GB";
   recognition.onresult = function (event) {
     console.log(event.results[0][0].transcript);
-    InputBoxDesc.innerText = event.results[0][0].transcript;
+    InputBoxDesc.value = event.results[0][0].transcript;
   };
   recognition.start();
 });
@@ -644,7 +668,7 @@ Add_Note_Microphone.addEventListener("click", function () {
   recognition.lang = "en-GB";
   recognition.onresult = function (event) {
     console.log(event.results[0][0].transcript);
-    InputBoxDescForNote.innerText = event.results[0][0].transcript;
+    InputBoxDescForNote.value = event.results[0][0].transcript;
   };
   recognition.start();
 });
