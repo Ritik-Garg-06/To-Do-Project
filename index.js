@@ -1,7 +1,14 @@
-
 document.addEventListener("DOMContentLoaded", function () {
   loadTasksAndNotes();
+  const storedImpCount = localStorage.getItem("impCount");
+  impCount = 0;
+  if (storedImpCount) {
+    impCount = parseInt(storedImpCount, 10);
+  }
+
+  console.log("impCount:", impCount);
 });
+
 //COMMON SELECTORS
 
 let blur = document.querySelector(".blur");
@@ -74,6 +81,7 @@ let rightContainer = document.querySelector(".right-container");
 let ulElements = rightContainer.querySelectorAll("ul");
 let MainContainerLeft = document.querySelector(".Main-container-left-ul");
 let MainContainerLeftUL = MainContainerLeft.querySelectorAll("li");
+let important = document.querySelector(".Important");
 
 // DONE TILL HERE
 
@@ -86,19 +94,19 @@ let noteIndex = 0;
 let curr_theme = "Day";
 let currentDate = new Date();
 let Default_date = currentDate.toISOString().split("T")[0];
+let impCount = 0;
 
-// Load tasks and notes from local storage on page load
 function loadTasksAndNotes() {
   const storedTasks = localStorage.getItem("tasks");
   if (storedTasks) {
-      tasks = JSON.parse(storedTasks);
-      renderTasks();
+    tasks = JSON.parse(storedTasks);
+    renderTasks();
   }
 
   const storedNotes = localStorage.getItem("notes");
   if (storedNotes) {
-      notes = JSON.parse(storedNotes);
-      renderNote();
+    notes = JSON.parse(storedNotes);
+    renderNote();
   }
 }
 
@@ -179,6 +187,7 @@ function addToDo() {
       priority: selectedValue,
       dueDate: taskDueDate,
       checked: false,
+      imp: false,
       category: curr_tab.classList.contains("Home-Name")
         ? "Home"
         : curr_tab.classList.contains("Today-task-Name")
@@ -238,10 +247,15 @@ function addToDo() {
     span4.innerText = "Details";
     span4.classList.add("Details-ToDo");
 
+    const span5 = document.createElement("span");
+    span5.innerHTML = '<img src="Images/star-unchecked.png" alt="Imp">';
+    span5.classList.add("Important");
+
     li.appendChild(span1);
     li.appendChild(span2);
     li.appendChild(span3);
     li.appendChild(span4);
+    li.appendChild(span5);
 
     li.classList.add("list-item-with-border");
     li.style.setProperty("--border-color", selectedValue);
@@ -332,7 +346,7 @@ function addNote() {
 
   InputBoxTitleForNote.value = "";
   InputBoxDescForNote.value = "";
-  
+
   localStorage.setItem("notes", JSON.stringify(notes));
   ClosePrompt();
 }
@@ -391,9 +405,15 @@ function deleteNote(index) {
 }
 
 function deleteTask(index) {
+  if ((tasks[index].imp == true)) {
+    impCount--;
+    localStorage.setItem("impCount", impCount);
+  }
   tasks.splice(index, 1);
+  taskIndex = 0;
   renderTasks();
   localStorage.setItem("tasks", JSON.stringify(tasks));
+  console.log(impCount);
 }
 function renderTasks() {
   // Clear all category containers
@@ -461,6 +481,18 @@ function renderTasks() {
       li.classList.add("checked");
     }
 
+    if (task.imp == false) {
+      const span5 = document.createElement("span");
+      span5.innerHTML = '<img src="Images/star-unchecked.png" alt="Imp">';
+      span5.classList.add("Important");
+      li.appendChild(span5);
+    } else if (task.imp == true) {
+      const span5 = document.createElement("span");
+      span5.innerHTML = '<img src="Images/star-checkked.png" alt="img">';
+      span5.classList.add("Important", "Imp-checked");
+      li.appendChild(span5);
+    }
+
     if (task.category === "Home") {
       HomeTab_Content.appendChild(li);
     } else if (task.category === "Week") {
@@ -496,6 +528,10 @@ function promptadd() {
 }
 
 function ClosePrompt() {
+  InputBoxDescForNote.value = "";
+  InputBoxTitleForNote.value = "";
+  InputBoxDesc.value = "";
+  InputBoxTitle.value = "";
   blur.classList.add("hidden");
   prompt.classList.add("hidden");
 }
@@ -550,7 +586,7 @@ function editToDo(taskIndex) {
       ? "Today"
       : "Week"
   );
-  
+
   localStorage.setItem("tasks", JSON.stringify(tasks));
   CloseEdit();
 }
@@ -576,6 +612,8 @@ function openEdit(taskIndex) {
 }
 
 function CloseEdit() {
+  InputBoxDescForEdit.value = "";
+  InputBoxTitleForEdit.value = "";
   blur.classList.add("hidden");
   Update_Prompt.classList.add("hidden");
 }
@@ -630,6 +668,32 @@ NotesTab.addEventListener("click", () => {
   curr_content = NotesTab_Content;
 });
 
+function priorityTask(index) {
+  const taskToMove = tasks[index];
+  tasks.splice(index, 1);
+  tasks.unshift(taskToMove);
+  renderTasks();
+  localStorage.setItem("tasks", JSON.stringify(tasks));
+  if (taskToMove.imp) {
+    impCount++;
+    localStorage.setItem("impCount", impCount);
+  }
+  console.log(impCount);
+}
+
+function putBack(Index) {
+  const taskToMove = tasks[Index];
+  tasks.splice(Index, 1);
+  tasks.splice(impCount-1, 0, taskToMove);
+  renderTasks();
+  localStorage.setItem("tasks", JSON.stringify(tasks));
+  if (!taskToMove.imp) {
+    impCount--;
+    localStorage.setItem("impCount", impCount);
+  }
+  console.log(impCount);
+}
+
 function attachClickListener(content) {
   content.addEventListener("click", function (e) {
     const listItem = e.target.closest("li");
@@ -648,8 +712,23 @@ function attachClickListener(content) {
         deleteTask(listItem.dataset.index);
       } else if (e.target.classList.contains("Details-ToDo")) {
         openDetails(listItem.dataset.index);
+      } else if (e.target.parentNode.classList.contains("Important")) {
+        if (e.target.parentNode.classList.contains("Imp-checked")) {
+          e.target.parentNode.classList.remove("Imp-checked");
+          e.target.parentNode.innerHTML =
+            '<img src="Images/star-unchecked.png" alt="Imp">';
+          tasks[listItem.dataset.index].imp = false;
+          putBack(listItem.dataset.index);
+        } else {
+          e.target.parentNode.classList.add("Imp-checked");
+          e.target.parentNode.innerHTML =
+            '<img src="Images/star-checked.png" alt="Imp">';
+          tasks[listItem.dataset.index].imp = true;
+          priorityTask(listItem.dataset.index);
+        }
       }
     }
+    localStorage.setItem("tasks", JSON.stringify(tasks));
   });
 }
 
