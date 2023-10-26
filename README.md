@@ -75,12 +75,8 @@ The To-Do Project goes beyond simple task management. It offers a user-friendly 
 
 A standout feature of the To-Do Project is its voice command functionality. By leveraging the microphone icon, users can effortlessly dictate notes and tasks, reducing the reliance on manual data entry and enhancing productivity.
 
-## License Information
-
-The To-Do Project operates under the permissive MIT License, granting users the freedom to utilize and adapt it for personal or commercial purposes. Detailed license terms are available in the project's [LICENSE](LICENSE) file.
-
 ---
 
 This expansive documentation aims to provide a comprehensive understanding of the To-Do Project's capabilities, ensuring that you can effectively manage tasks and notes with precision and ease. Should you need further information or support, do not hesitate to reach out.
 
-Thank you for choosing the To-Do Project, your partner in efficient task and note management.
+Thank you for choosing the To-Do Project.
