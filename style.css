@@ -8,18 +8,18 @@
   user-select: none;
 }
 
-:root{
-  --purple : #c38d95;
-  --light-grey : #eee;
-  --blue : #3ba395;
-  --black : #555;
+:root {
+  --purple: #c38d95;
+  --light-grey: #eee;
+  --blue: #3ba395;
+  --black: #555;
 }
 
-.dark-theme{
-  --purple : #2d4356;
-  --light-grey : #435b66;
-  --blue : #5c5470; 
-  --black : #C2D9FF;
+.dark-theme {
+  --purple: #2d4356;
+  --light-grey: #435b66;
+  --blue: #5c5470;
+  --black: #c2d9ff;
 }
 
 #wrapper {
@@ -29,13 +29,13 @@
   position: relative;
 }
 
-.theme{
+.theme {
   position: absolute;
   right: 40px;
   top: 10px;
 }
 
-.theme-img{
+.theme-img {
   height: 35px;
 }
 
@@ -54,15 +54,16 @@
 }
 
 .Bottom-container {
-  width: 100%;
+  /* width: 100%; */
   height: 92%;
   display: grid;
   grid-template-columns: 1fr 4fr;
+  background-color: white;
 }
 
 .left-container {
   background-color: var(--light-grey);
-  width: 100%;
+  /* width: 100%; */
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -77,16 +78,16 @@
 }
 
 .left-Upper-contents ul li {
-  width: 100%;
+  /* width: 100%; */
   margin: 20px;
-  transition: transform 3000ms;
-  transform-origin: left;
+  transition: color 2000ms;
+  /* transform-origin: left; */
   list-style: none;
 }
 
 .left-Upper-contents ul li:hover,
 .selected_value {
-  color:var(--purple);
+  color: var(--purple);
   font-weight: 900;
 }
 
@@ -94,6 +95,7 @@
   display: flex;
   flex-direction: column;
   margin: 1.5rem;
+  /* background-color: white; */
 }
 
 .radio-labels {
@@ -160,11 +162,11 @@ input[type="submit"] {
   background-color: transparent;
   border: 1px solid var(--blue);
   border-radius: 20px;
-  width: 100%;
+  /* width: 100%; */
 }
 
 .date {
-  margin-top: 20%;
+  margin-top: 10%;
   margin-bottom: 5%;
 }
 
@@ -189,7 +191,7 @@ input[type="submit"] {
 }
 
 .right-container {
-  width: 100%;
+  /* width: 100%; */
   overflow-y: auto;
   overflow-x: hidden;
 }
@@ -210,9 +212,9 @@ input[type="submit"] {
 
 .right-container ul li::before {
   content: "";
-  height: 60%;
+  height: 67%;
   width: 27px;
-  border-radius: 50%;
+  /* border-radius: 50%; */
   background-image: url(Images/unchecked.png);
   background-size: cover;
   margin: 0% 2%;
@@ -227,7 +229,7 @@ input[type="submit"] {
   background-image: url(Images/checked.png);
 }
 
-.Microphone{
+.Microphone {
   width: 4%;
   position: absolute;
   right: 5%;
@@ -240,16 +242,16 @@ input[type="submit"] {
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  width: 50%;
-  padding: 20px;
+  width: 44%;
   z-index: 2;
+  box-shadow: 4px 4px 10px 2px #888888;
 }
 
 .Add-Task-Prompt-Navbar {
-  width: 100%;
-  height: 18%;
+  /* width: 100%; */
+  /* height: 18%; */
   background: var(--purple);
-  display: flex;
+  /* display: flex; */
   position: relative;
 }
 
@@ -272,10 +274,11 @@ input[type="submit"] {
 #Create-Note-Title {
   margin-bottom: 5%;
   border: none;
+  height: 2rem;
 }
 
 #Create-Note-Description {
-  height: 40%;
+  height: 50%;
   border: none;
 }
 
@@ -299,14 +302,15 @@ input[type="submit"] {
 }
 
 .Prompt-form-Submit-Note {
-  width: 25%;
+  /* width: 25%; */
   margin: 5%;
 }
 
 /* EDIT PROMPT CSS */
 
-.edit-container {
-  left: 65%;
+.to-do-edit-desc-mike{
+  display: flex;
+  justify-content: space-between;
 }
 
 .edit-To-Do {
@@ -316,6 +320,17 @@ input[type="submit"] {
 .edit-close-container {
   display: flex;
   justify-content: space-between;
+}
+
+.Edit-desc-Microphone {
+  width: 5%;
+  position: relative;
+  right: 0%;
+  height: 35%;
+}
+
+.edit-close-container {
+  position: relative;
 }
 
 .close-edit {
@@ -363,11 +378,10 @@ input[type="submit"] {
   overflow-y: auto;
   background-color: var(--light-grey);
   color: var(--black);
-  
 }
 
-.Note-container:hover{
-  box-shadow: 6px 7px 12px #555 ;
+.Note-container:hover {
+  box-shadow: 6px 7px 12px #555;
 }
 
 .noteUpperContainer {
@@ -398,7 +412,7 @@ input[type="submit"] {
 }
 
 div[contenteditable="true"]:focus {
-  outline: none; 
+  outline: none;
 }
 
 .Update-Data-Note {
@@ -458,13 +472,13 @@ div[contenteditable="true"]:focus {
 }
 
 .left-lower-contents {
-  position: relative;
+  /* position: absolute; */
   height: 60px;
   width: 50px;
   border-radius: 50%;
   background-color: var(--purple);
-  bottom: 15px;
-  left: 5px;
+  /* bottom: 15px; */
+  /* left: 5px; */
   font-size: 2rem;
   color: white;
   display: flex;
@@ -473,7 +487,7 @@ div[contenteditable="true"]:focus {
   cursor: pointer;
 }
 
-.counter{
+.counter {
   position: absolute;
   right: 7%;
   background-color: var(--black);
@@ -557,14 +571,12 @@ div[contenteditable="true"]:focus {
   color: white;
 }
 
-.Important{
+.Important {
   position: absolute;
   right: 325px;
 }
 
-.Important img{
+.Important img {
   height: 20px;
   width: 20px;
 }
-
-/* DONE TILL HERE */

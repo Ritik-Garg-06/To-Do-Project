@@ -1,3 +1,5 @@
+// Loading Contents From Local Storage
+
 document.addEventListener("DOMContentLoaded", function () {
   loadTasksAndNotes();
   const storedImpCount = localStorage.getItem("impCount");
@@ -83,7 +85,7 @@ let MainContainerLeft = document.querySelector(".Main-container-left-ul");
 let MainContainerLeftUL = MainContainerLeft.querySelectorAll("li");
 let important = document.querySelector(".Important");
 
-// DONE TILL HERE
+// Variable Declarations
 
 let curr_tab = HomeTab;
 curr_tab.classList.add("selected_value");
@@ -96,6 +98,8 @@ let currentDate = new Date();
 let Default_date = currentDate.toISOString().split("T")[0];
 let impCount = 0;
 
+// Function to load Data from Local Storage
+
 function loadTasksAndNotes() {
   const storedTasks = localStorage.getItem("tasks");
   if (storedTasks) {
@@ -103,12 +107,18 @@ function loadTasksAndNotes() {
     renderTasks();
   }
 
+  // Gathering contents of tasks array from local storage
+
   const storedNotes = localStorage.getItem("notes");
   if (storedNotes) {
     notes = JSON.parse(storedNotes);
     renderNote();
   }
+
+  // Gathering contents of Notes array from local storage
 }
+
+// Changing Theme
 
 theme.addEventListener("click", function () {
   if (curr_theme == "Night") {
@@ -125,12 +135,16 @@ theme.addEventListener("click", function () {
   }
 });
 
+// Function to Switch Tab
+
 function switchTab(contentList, tabi) {
   ulElements.forEach((section) => {
     if (!section.classList.contains("hidden")) {
       section.classList.add("hidden");
     }
   });
+
+  // AT FIRST ADDING HIDDEN CLASSS TO ALL TABS
 
   MainContainerLeftUL.forEach((li) => {
     const span = li.querySelector("span");
@@ -141,6 +155,8 @@ function switchTab(contentList, tabi) {
   contentList.classList.remove("hidden");
   tabi.classList.add("selected_value");
 
+  // REMOVING HIDDEN CLASS FROM MY SELECTED TAB
+
   if (tabi == TodayTab) {
     FormDueDate.setAttribute("readonly", "true");
     FormDueDate.value = Default_date;
@@ -148,6 +164,7 @@ function switchTab(contentList, tabi) {
     FormDueDate.removeAttribute("readonly");
   }
 
+  // IF USER SELECTS THE TODAY TAB SETTING ITS DATE TO BE READ ONLY SO THAT USER CAN NOT EDIT THAT LATER
   if (tabi == WeekTab) {
     const maxDate = new Date();
     maxDate.setDate(currentDate.getDate() + 7);
@@ -156,10 +173,39 @@ function switchTab(contentList, tabi) {
 
     FormDueDate.min = Default_date;
     FormDueDate.max = maxDateStr;
+  } else {
+    FormDueDate.removeAttribute("min");
+    FormDueDate.removeAttribute("max");
+  }
+
+  // IF USER SELECTS THE WEEK TAB SETTING ITS DURATION TO ONE WEEK STARTING FROM TODAY
+}
+
+// FUNCTION TO OPEN THE PROMPT {TO ADD NOTES OR TASKS}
+function promptadd() {
+  blur.classList.remove("hidden");
+  prompt.classList.remove("hidden");
+  if (curr_tab == NotesTab) {
+    if (Prompt_add_Note.classList.contains("hidden")) {
+      Prompt_add_Note.classList.remove("hidden");
+    }
+    Prompt_add_To_do.classList.add("hidden");
+    To_Do_container.classList.add("hidden");
+    Note_container.classList.remove("hidden");
+  } else {
+    if (Prompt_add_To_do.classList.contains("hidden")) {
+      Prompt_add_To_do.classList.remove("hidden");
+    }
+    Prompt_add_Note.classList.add("hidden");
+    To_Do_container.classList.remove("hidden");
+    Note_container.classList.add("hidden");
   }
 }
 
+// ARRAY OF OBJECTS TO STORE ALL THE TASKS IRRESPECTIVE OF THEIR TAB
 let tasks = [];
+
+// FUNCTION TO DISPLAY AND ADD TASKS IN ARRAY
 function addToDo() {
   if (InputBoxTitle.value === "") {
     alert("You must write something!");
@@ -181,6 +227,7 @@ function addToDo() {
     }
     const taskDueDate = FormDueDate.value;
 
+    // CREATED AN OBJECT TO INSERT INSIDE TASKS ARRAY
     const newTask = {
       title: taskText,
       description: taskDescription,
@@ -284,128 +331,9 @@ function addToDo() {
   ClosePrompt();
 }
 
-let notes = [];
-
-function addNote() {
-  if (InputBoxTitleForNote.value === "") {
-    alert("You must write something in Note!");
-  } else {
-    const taskText = InputBoxTitleForNote.value;
-    const taskDescription = InputBoxDescForNote.value;
-
-    let selectedValue = null;
-
-    const newNote = {
-      title: taskText,
-      description: taskDescription,
-    };
-
-    notes.push(newNote);
-
-    noteIndex = notes.length - 1;
-
-    NotesTab_Count.innerText = notes.length;
-    console.log(notes.length);
-
-    const noteDiv = document.createElement("div");
-    const noteUpperContainer = document.createElement("div");
-    const noteTitle = document.createElement("div");
-    const noteUpperContainerTools = document.createElement("div");
-    const span2 = document.createElement("span");
-    span2.innerText = "\u00d7";
-    span2.classList.add("Cross-Note");
-    const noteDesc = document.createElement("div");
-
-    noteDiv.classList.add("Note-container");
-    noteTitle.classList.add("Note-Title");
-    noteDesc.classList.add("Note-Desc");
-    noteDesc.contentEditable = true;
-    noteUpperContainer.classList.add("noteUpperContainer");
-
-    noteTitle.textContent = newNote.title;
-    noteDesc.textContent = newNote.description;
-
-    noteDiv.dataset.index = noteIndex;
-
-    noteUpperContainerTools.appendChild(span2);
-    noteUpperContainer.appendChild(noteTitle);
-    noteUpperContainer.appendChild(noteUpperContainerTools);
-    noteDiv.appendChild(noteUpperContainer);
-    noteDiv.appendChild(noteDesc);
-
-    span2.addEventListener("click", function () {
-      const noteDiv = this.closest(".Note-container");
-      if (noteDiv) {
-        const noteIndex = noteDiv.dataset.index;
-        deleteNote(noteIndex);
-      }
-    });
-
-    NotesTab_Content.insertBefore(noteDiv, NotesTab_Content.firstChild);
-  }
-
-  InputBoxTitleForNote.value = "";
-  InputBoxDescForNote.value = "";
-
-  localStorage.setItem("notes", JSON.stringify(notes));
-  ClosePrompt();
-}
-
-function renderNote() {
-  NotesTab_Content.innerHTML = "";
-  if (notes.length == 0) {
-    NotesTab_Count.innerText = "";
-  } else {
-    NotesTab_Count.innerText = notes.length;
-  }
-  notes.forEach((note, index) => {
-    console.log(notes.length);
-    const noteDiv = document.createElement("div");
-    const noteUpperContainer = document.createElement("div");
-    const noteTitle = document.createElement("div");
-    const noteUpperContainerTools = document.createElement("div");
-    const span2 = document.createElement("span");
-    span2.innerText = "\u00d7";
-    span2.classList.add("Cross-Note");
-    const noteDesc = document.createElement("div");
-
-    noteDiv.classList.add("Note-container");
-    noteTitle.classList.add("Note-Title");
-    noteDesc.classList.add("Note-Desc");
-    noteDesc.contentEditable = true;
-    noteUpperContainer.classList.add("noteUpperContainer");
-
-    noteTitle.textContent = note.title;
-    noteDesc.textContent = note.description;
-
-    noteDiv.dataset.index = index;
-
-    noteUpperContainerTools.appendChild(span2);
-    noteUpperContainer.appendChild(noteTitle);
-    noteUpperContainer.appendChild(noteUpperContainerTools);
-    noteDiv.appendChild(noteUpperContainer);
-    noteDiv.appendChild(noteDesc);
-
-    span2.addEventListener("click", function () {
-      const noteDiv = this.closest(".Note-container");
-      if (noteDiv) {
-        const noteIndex = noteDiv.dataset.index;
-        deleteNote(noteIndex);
-      }
-    });
-
-    NotesTab_Content.insertBefore(noteDiv, NotesTab_Content.firstChild);
-  });
-}
-
-function deleteNote(index) {
-  notes.splice(index, 1);
-  renderNote();
-  localStorage.setItem("notes", JSON.stringify(notes));
-}
-
+// FUNCTION TO DELETE ANY TASK FROM ARRAY
 function deleteTask(index) {
-  if ((tasks[index].imp == true)) {
+  if (tasks[index].imp == true) {
     impCount--;
     localStorage.setItem("impCount", impCount);
   }
@@ -413,8 +341,9 @@ function deleteTask(index) {
   taskIndex = 0;
   renderTasks();
   localStorage.setItem("tasks", JSON.stringify(tasks));
-  console.log(impCount);
 }
+
+// FUNCTION TO DISPLAY TASKS IF ANY TASK IS DELETED
 function renderTasks() {
   // Clear all category containers
   HomeTab_Content.innerHTML = "";
@@ -507,26 +436,134 @@ function renderTasks() {
   });
 }
 
-function promptadd() {
-  blur.classList.remove("hidden");
-  prompt.classList.remove("hidden");
-  if (curr_tab == NotesTab) {
-    if (Prompt_add_Note.classList.contains("hidden")) {
-      Prompt_add_Note.classList.remove("hidden");
-    }
-    Prompt_add_To_do.classList.add("hidden");
-    To_Do_container.classList.add("hidden");
-    Note_container.classList.remove("hidden");
+// ARRAY TO STORE NOTES
+let notes = [];
+
+// FUNCTION TO DISPLAY ADD NOTES IN ARRAY
+function addNote() {
+  if (InputBoxTitleForNote.value === "") {
+    alert("You must write something in Note!");
   } else {
-    if (Prompt_add_To_do.classList.contains("hidden")) {
-      Prompt_add_To_do.classList.remove("hidden");
-    }
-    Prompt_add_Note.classList.add("hidden");
-    To_Do_container.classList.remove("hidden");
-    Note_container.classList.add("hidden");
+    const taskText = InputBoxTitleForNote.value;
+    const taskDescription = InputBoxDescForNote.value;
+
+    let selectedValue = null;
+
+    const newNote = {
+      title: taskText,
+      description: taskDescription,
+    };
+
+    notes.push(newNote);
+
+    noteIndex = notes.length - 1;
+
+    NotesTab_Count.innerText = notes.length;
+    console.log(notes.length);
+
+    const noteDiv = document.createElement("div");
+    const noteUpperContainer = document.createElement("div");
+    const noteTitle = document.createElement("div");
+    const noteUpperContainerTools = document.createElement("div");
+    const span2 = document.createElement("span");
+    span2.innerText = "\u00d7";
+    span2.classList.add("Cross-Note");
+    const noteDesc = document.createElement("div");
+
+    noteDiv.classList.add("Note-container");
+    noteTitle.classList.add("Note-Title");
+    noteDesc.classList.add("Note-Desc");
+    noteDesc.contentEditable = true;
+    noteUpperContainer.classList.add("noteUpperContainer");
+
+    noteTitle.textContent = newNote.title;
+    noteDesc.textContent = newNote.description;
+
+    noteDiv.dataset.index = noteIndex;
+
+    noteUpperContainerTools.appendChild(span2);
+    noteUpperContainer.appendChild(noteTitle);
+    noteUpperContainer.appendChild(noteUpperContainerTools);
+    noteDiv.appendChild(noteUpperContainer);
+    noteDiv.appendChild(noteDesc);
+
+    span2.addEventListener("click", function () {
+      const noteDiv = this.closest(".Note-container");
+      if (noteDiv) {
+        const noteIndex = noteDiv.dataset.index;
+        deleteNote(noteIndex);
+      }
+    });
+    // INSERTING NEW NODE BEFORE THE FIRST NODE
+    NotesTab_Content.insertBefore(noteDiv, NotesTab_Content.firstChild);
   }
+
+  InputBoxTitleForNote.value = "";
+  InputBoxDescForNote.value = "";
+
+  localStorage.setItem("notes", JSON.stringify(notes));
+  ClosePrompt();
 }
 
+// FUNCTION TO REMOVE NOTE FROM ARRAY
+function deleteNote(index) {
+  notes.splice(index, 1);
+  renderNote();
+  localStorage.setItem("notes", JSON.stringify(notes));
+}
+
+// IF A USER DELETES ONE NOTE THIS WILL CLEAR THE WHOLE NOTES_CONTENT AND RE WRITES AGAIN EXCEPT THAT NOTE
+function renderNote() {
+  // FIRST IT WILL CLEAR ALL THE CONTENTS
+  NotesTab_Content.innerHTML = "";
+
+  // UPDATE THE COUNT OF TOTAL NOTES
+  if (notes.length == 0) {
+    NotesTab_Count.innerText = "";
+  } else {
+    NotesTab_Count.innerText = notes.length;
+  }
+  notes.forEach((note, index) => {
+    console.log(notes.length);
+    const noteDiv = document.createElement("div");
+    const noteUpperContainer = document.createElement("div");
+    const noteTitle = document.createElement("div");
+    const noteUpperContainerTools = document.createElement("div");
+    const span2 = document.createElement("span");
+    span2.innerText = "\u00d7";
+    span2.classList.add("Cross-Note");
+    const noteDesc = document.createElement("div");
+
+    noteDiv.classList.add("Note-container");
+    noteTitle.classList.add("Note-Title");
+    noteDesc.classList.add("Note-Desc");
+    noteDesc.contentEditable = true;
+    noteUpperContainer.classList.add("noteUpperContainer");
+
+    noteTitle.textContent = note.title;
+    noteDesc.textContent = note.description;
+
+    noteDiv.dataset.index = index;
+
+    noteUpperContainerTools.appendChild(span2);
+    noteUpperContainer.appendChild(noteTitle);
+    noteUpperContainer.appendChild(noteUpperContainerTools);
+    noteDiv.appendChild(noteUpperContainer);
+    noteDiv.appendChild(noteDesc);
+
+    span2.addEventListener("click", function () {
+      const noteDiv = this.closest(".Note-container");
+      if (noteDiv) {
+        const noteIndex = noteDiv.dataset.index;
+        deleteNote(noteIndex);
+      }
+    });
+
+    NotesTab_Content.insertBefore(noteDiv, NotesTab_Content.firstChild);
+  });
+}
+
+// FUNCTION TO CLOSE THE PROMPT OF ADD NOTES/TASKS
 function ClosePrompt() {
   InputBoxDescForNote.value = "";
   InputBoxTitleForNote.value = "";
@@ -536,6 +573,7 @@ function ClosePrompt() {
   prompt.classList.add("hidden");
 }
 
+// FUNCTION TO SWITCH FROM NOTE TO TODO 
 function openToDo() {
   if (!Note_container.classList.contains("hidden")) {
     Note_container.classList.add("hidden");
@@ -543,6 +581,7 @@ function openToDo() {
   To_Do_container.classList.remove("hidden");
 }
 
+// FUNCTION TO SWITCH FROM TODO TO NOTE 
 function openNote() {
   if (!To_Do_container.classList.contains("hidden")) {
     To_Do_container.classList.add("hidden");
@@ -550,13 +589,30 @@ function openNote() {
   Note_container.classList.remove("hidden");
 }
 
-function handleItemClick(e) {
-  if (e.target.tagName === "LI") {
-    e.target.classList.toggle("checked");
-  } else if (e.target.tagName === "SPAN") {
-    e.target.parentElement.remove();
+// FUNCTION TO OPEN THE EDIT CONTAINER
+
+function openEdit(taskIndex) {
+  const task = tasks[taskIndex];
+  InputBoxTitleForEdit.value = task.title;
+  InputBoxDescForEdit.value = task.description;
+  FormDueDateForEdit.value = task.dueDate;
+
+  for (const radioButton of priorityForEdit) {
+    if (radioButton.value === task.priority) {
+      radioButton.checked = true;
+    }
   }
+
+  updateButton.addEventListener("click", function () {
+    editToDo(taskIndex);
+  });
+
+  blur.classList.remove("hidden");
+  Update_Prompt.classList.remove("hidden");
 }
+
+// FUNCTION TO DO TASK ON EDIT CONTAINER
+
 function editToDo(taskIndex) {
   const modifiedTitle = InputBoxTitleForEdit.value;
   const modifiedDescription = InputBoxDescForEdit.value;
@@ -591,25 +647,7 @@ function editToDo(taskIndex) {
   CloseEdit();
 }
 
-function openEdit(taskIndex) {
-  const task = tasks[taskIndex];
-  InputBoxTitleForEdit.value = task.title;
-  InputBoxDescForEdit.value = task.description;
-  FormDueDateForEdit.value = task.dueDate;
-
-  for (const radioButton of priorityForEdit) {
-    if (radioButton.value === task.priority) {
-      radioButton.checked = true;
-    }
-  }
-
-  updateButton.addEventListener("click", function () {
-    editToDo(taskIndex);
-  });
-
-  blur.classList.remove("hidden");
-  Update_Prompt.classList.remove("hidden");
-}
+// FUNCTION TO CLOSE THE EDIT CONTAINER
 
 function CloseEdit() {
   InputBoxDescForEdit.value = "";
@@ -617,6 +655,8 @@ function CloseEdit() {
   blur.classList.add("hidden");
   Update_Prompt.classList.add("hidden");
 }
+
+// FUNCTION TO OPEN THE DETAILS
 
 function openDetails(taskIndex) {
   detailsHeading.innerText = tasks[taskIndex].title;
@@ -627,46 +667,14 @@ function openDetails(taskIndex) {
   DetailsContainer.classList.remove("hidden");
 }
 
+// FUNCTION TO CLOSE DETAILS CONTAINER
+
 function DetailClose() {
   blur.classList.add("hidden");
   DetailsContainer.classList.add("hidden");
 }
 
-close_edit_prompt.addEventListener("click", CloseEdit);
-CloseDetails.addEventListener("click", DetailClose);
-plus_sign.addEventListener("click", promptadd);
-close.addEventListener("click", ClosePrompt);
-Prompt_add_To_do.addEventListener("click", openToDo);
-Prompt_add_Note.addEventListener("click", openNote);
-
-attachClickListener(HomeTab_Content);
-attachClickListener(TodayTab_Content);
-attachClickListener(WeekTab_Content);
-attachClickListener(NotesTab_Content);
-
-HomeTab.addEventListener("click", () => {
-  switchTab(HomeTab_Content, HomeTab);
-  curr_tab = HomeTab;
-  curr_content = HomeTab_Content;
-});
-
-TodayTab.addEventListener("click", () => {
-  switchTab(TodayTab_Content, TodayTab);
-  curr_tab = TodayTab;
-  curr_content = TodayTab_Content;
-});
-
-WeekTab.addEventListener("click", () => {
-  switchTab(WeekTab_Content, WeekTab);
-  curr_tab = WeekTab;
-  curr_content = WeekTab_Content;
-});
-
-NotesTab.addEventListener("click", () => {
-  switchTab(NotesTab_Content, NotesTab);
-  curr_tab = NotesTab;
-  curr_content = NotesTab_Content;
-});
+// FUNCTION TO UPDATE THE ELEMENT ON WHICH PRIORITY IS SET AND TO INCREASE THE PRIORITY COUNT
 
 function priorityTask(index) {
   const taskToMove = tasks[index];
@@ -681,10 +689,12 @@ function priorityTask(index) {
   console.log(impCount);
 }
 
+// FUNCTION TO PUT THE LI BACK IF ITS PRIORITY IS REMOVED
+
 function putBack(Index) {
   const taskToMove = tasks[Index];
   tasks.splice(Index, 1);
-  tasks.splice(impCount-1, 0, taskToMove);
+  tasks.splice(impCount - 1, 0, taskToMove);
   renderTasks();
   localStorage.setItem("tasks", JSON.stringify(tasks));
   if (!taskToMove.imp) {
@@ -693,6 +703,10 @@ function putBack(Index) {
   }
   console.log(impCount);
 }
+
+// EVENT LISTENERS STARTED
+
+// FUNCTION TO ADD EVENT LISTENERS ON THE LI ELEMENT
 
 function attachClickListener(content) {
   content.addEventListener("click", function (e) {
@@ -731,6 +745,42 @@ function attachClickListener(content) {
     localStorage.setItem("tasks", JSON.stringify(tasks));
   });
 }
+
+close_edit_prompt.addEventListener("click", CloseEdit);
+CloseDetails.addEventListener("click", DetailClose);
+plus_sign.addEventListener("click", promptadd);
+close.addEventListener("click", ClosePrompt);
+Prompt_add_To_do.addEventListener("click", openToDo);
+Prompt_add_Note.addEventListener("click", openNote);
+
+attachClickListener(HomeTab_Content);
+attachClickListener(TodayTab_Content);
+attachClickListener(WeekTab_Content);
+attachClickListener(NotesTab_Content);
+
+HomeTab.addEventListener("click", () => {
+  switchTab(HomeTab_Content, HomeTab);
+  curr_tab = HomeTab;
+  curr_content = HomeTab_Content;
+});
+
+TodayTab.addEventListener("click", () => {
+  switchTab(TodayTab_Content, TodayTab);
+  curr_tab = TodayTab;
+  curr_content = TodayTab_Content;
+});
+
+WeekTab.addEventListener("click", () => {
+  switchTab(WeekTab_Content, WeekTab);
+  curr_tab = WeekTab;
+  curr_content = WeekTab_Content;
+});
+
+NotesTab.addEventListener("click", () => {
+  switchTab(NotesTab_Content, NotesTab);
+  curr_tab = NotesTab;
+  curr_content = NotesTab_Content;
+});
 
 Add_to_do_details_Microphone.addEventListener("click", function () {
   var recognition = new webkitSpeechRecognition();
