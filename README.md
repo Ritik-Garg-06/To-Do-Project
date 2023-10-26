@@ -13,7 +13,6 @@ Welcome to the To-Do Project, a sophisticated web application designed to stream
 5. [Customization Options](#customization-options)
 6. [Advanced Functionality](#advanced-functionality)
 7. [Voice Command Integration](#voice-command-integration)
-8. [License Information](#license-information)
 
 ## Project Overview
 
