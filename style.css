@@ -308,7 +308,7 @@ input[type="submit"] {
 
 /* EDIT PROMPT CSS */
 
-.to-do-edit-desc-mike{
+.to-do-edit-desc-mike {
   display: flex;
   justify-content: space-between;
 }
@@ -413,6 +413,16 @@ input[type="submit"] {
 
 div[contenteditable="true"]:focus {
   outline: none;
+}
+
+.image-Update-Data{
+  width: 20px;
+  height: 20px;
+  font-size: 1.25rem;
+  color: #555;
+  line-height: 30px;
+  text-align: center;
+  font-size: 0.9rem;
 }
 
 .Update-Data-Note {

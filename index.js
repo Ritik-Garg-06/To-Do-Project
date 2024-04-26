@@ -280,7 +280,8 @@ function addToDo() {
     li.dataset.index = taskIndex;
 
     const span1 = document.createElement("span");
-    span1.innerHTML = '<img src="Images/edit.png" class="Update-Data"/>';
+    span1.innerHTML = '<img src="Images/edit.png" class="image-Update-Data"/>';
+    span1.classList.add("Update-Data");
 
     const span2 = document.createElement("span");
     span2.innerText = "\u00d7";
@@ -383,7 +384,8 @@ function renderTasks() {
     li.dataset.index = index;
 
     const span1 = document.createElement("span");
-    span1.innerHTML = '<img src="Images/edit.png" class="Update-Data"/>';
+    span1.innerHTML = '<img src="Images/edit.png" class="image-Update-Data"/>';
+    span1.classList.add("Update-Data");
 
     const span2 = document.createElement("span");
     span2.innerText = "\u00d7";
@@ -573,7 +575,7 @@ function ClosePrompt() {
   prompt.classList.add("hidden");
 }
 
-// FUNCTION TO SWITCH FROM NOTE TO TODO 
+// FUNCTION TO SWITCH FROM NOTE TO TODO
 function openToDo() {
   if (!Note_container.classList.contains("hidden")) {
     Note_container.classList.add("hidden");
@@ -581,7 +583,7 @@ function openToDo() {
   To_Do_container.classList.remove("hidden");
 }
 
-// FUNCTION TO SWITCH FROM TODO TO NOTE 
+// FUNCTION TO SWITCH FROM TODO TO NOTE
 function openNote() {
   if (!To_Do_container.classList.contains("hidden")) {
     To_Do_container.classList.add("hidden");
@@ -590,9 +592,10 @@ function openNote() {
 }
 
 // FUNCTION TO OPEN THE EDIT CONTAINER
-
 function openEdit(taskIndex) {
+  console.log("Open edit is called");
   const task = tasks[taskIndex];
+  console.log(task);
   InputBoxTitleForEdit.value = task.title;
   InputBoxDescForEdit.value = task.description;
   FormDueDateForEdit.value = task.dueDate;
@@ -603,9 +606,16 @@ function openEdit(taskIndex) {
     }
   }
 
-  updateButton.addEventListener("click", function () {
+  function updateButtonClickHandler() {
+    console.log("Update button is clicked");
     editToDo(taskIndex);
-  });
+
+    updateButton.removeEventListener("click", updateButtonClickHandler);
+  }
+
+  updateButton.removeEventListener("click", updateButtonClickHandler);
+
+  updateButton.addEventListener("click", updateButtonClickHandler);
 
   blur.classList.remove("hidden");
   Update_Prompt.classList.remove("hidden");
@@ -614,6 +624,7 @@ function openEdit(taskIndex) {
 // FUNCTION TO DO TASK ON EDIT CONTAINER
 
 function editToDo(taskIndex) {
+  console.log("EditToDo is callled");
   const modifiedTitle = InputBoxTitleForEdit.value;
   const modifiedDescription = InputBoxDescForEdit.value;
   const modifiedDate = FormDueDateForEdit.value;
@@ -629,19 +640,14 @@ function editToDo(taskIndex) {
   let modifiedPriority = selectedValue;
 
   const EditIndex = taskIndex;
+  console.log("Edit Index is " + EditIndex);
 
   tasks[EditIndex].title = modifiedTitle;
   tasks[EditIndex].description = modifiedDescription;
   tasks[EditIndex].dueDate = modifiedDate;
   tasks[EditIndex].priority = modifiedPriority;
 
-  renderTasks(
-    curr_tab.classList.contains("Home-Name")
-      ? "Home"
-      : curr_tab.classList.contains("Today-task-Name")
-      ? "Today"
-      : "Week"
-  );
+  renderTasks();
 
   localStorage.setItem("tasks", JSON.stringify(tasks));
   CloseEdit();
@@ -711,6 +717,9 @@ function putBack(Index) {
 function attachClickListener(content) {
   content.addEventListener("click", function (e) {
     const listItem = e.target.closest("li");
+    console.log("Closest li is " + listItem);
+    var parentClass = e.target.parentNode.className;
+    console.log("Parent class name is " + parentClass);
     if (listItem) {
       if (e.target.tagName === "LI") {
         if (listItem.classList.contains("checked")) {
@@ -720,7 +729,8 @@ function attachClickListener(content) {
           listItem.classList.add("checked");
           tasks[listItem.dataset.index].checked = true;
         }
-      } else if (e.target.classList.contains("Update-Data")) {
+      } else if (parentClass == "Update-Data") {
+        console.log(listItem.dataset.index);
         openEdit(listItem.dataset.index);
       } else if (e.target.classList.contains("Cross")) {
         deleteTask(listItem.dataset.index);
